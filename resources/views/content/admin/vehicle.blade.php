@@ -80,26 +80,32 @@
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content" style="background-color:#F4F3EF">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modal-reservation-title">Vehicle Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="d-flex justify-content-between p-3"  style="background-color: #3B7DDD;">
+                    <h5 class="modal-title" id="modal-reservation-title" style="color:#fff;font-size:20px;font-weight:bold">Vehicle Details</h5>
+                    <i class="fas fa-times fa-2x" data-bs-dismiss="modal" style="cursor: pointer;color:#fff"></i>
                 </div>
                 <div class="modal-body">
                     <div class="row py-3">
+
                         <input type="hidden" value="" id="vehicleIdForMaintenance">
+
                         <div class="col-lg-6" style="position: relative">
-                            <div style=" position: absolute; top: 20%; ">
+                            <div style=" position: absolute; top: 30%; ">
                                 <img id="imageFile" class="img-responsive" style="max-width:100%" />
-                                <div class="d-grid gap-2 col-8 mx-auto">
-                                    <a href="#" value="" class="btn btn-danger" id="openOffCanvas" type="button"><i
-                                            class="fas fa-cogs"></i> Preventive Maintenance Services</a>
-                                </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="card" style="border:solid 1px #cfcfcf">
                                 <div class="card-body">
-                                    <h4 class="mb-0" style="font-size: 20px" id="vehicleName">Ford Ranger</h4>
+                                    <div class="d-flex justify-content-between">
+                                        <h4 class="mb-0" style="font-size: 20px" id="vehicleName">Ford Ranger</h4>
+                                        <a type="button" id="openOffCanvas" class="btn position-relative px-2" style="border-radius:50%;background-color:#fff;box-shadow: 4px 1px 8px 0px rgba(0,0,0,0.44);border:solid 1px #cfcfcf">
+                                            <i class="fas fa-cog" style="font-size:20px;"></i>
+                                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                 <i class="fas fa-bell"></i>
+                                             </span>
+                                         </a>
+                                    </div>
                                     <hr>
 
                                     <div class="row mb-0">
