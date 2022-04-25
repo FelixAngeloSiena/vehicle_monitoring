@@ -15,4 +15,8 @@ class AdminController extends Controller
         return view('content.admin.admin_dashboard');
     }
 
+    public function user_accounts(){
+        return view('content.admin.user_accounts');
+    }
+
 }

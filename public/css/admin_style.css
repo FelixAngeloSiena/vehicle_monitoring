@@ -12393,7 +12393,8 @@ Dashboard
   font-size: 17px;
   font-weight:bold;
 }
-#filepond--drop-label-opeb4sukk{
+
+.filepond--root *:not(text) {
+  font-size: 12px!important;
   font-family: 'Kanit', sans-serif!important;
-  font-size:12px!important;
 }

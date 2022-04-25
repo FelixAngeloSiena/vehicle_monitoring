@@ -7,7 +7,7 @@
                 <div class="d-flex justify-content-between">
                     <h1 class="h3 mb-3"><strong>Vehicle Drivers</strong> Records</h1>
                     <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" style="color:#fff;font-size:17px;font-weight:bold"
-                        data-bs-target="#exampleModal"><i class="fas fa-edit"></i> Create Driver</button>
+                        data-bs-target="#exampleModal"><i class="fas fa-edit"></i> Add another driver</button>
                 </div>
 
                 <div class="card">
@@ -64,51 +64,66 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>Upload Profile Picture:</small> </label>
-                                            <input type="file filepond" name="file" id="uploadProfileImage">
+                                        <div class="card" style="border: 1px solid #f2f2f2">
+                                            <div class="card-body">
+                                                <p class="mb-0" style="font-weight: bold;font-size:20px; ">Driver Details</p>
+                                                <div class="mb-0">
+                                                    <label for="exampleFormControlInput1" class="form-label mb-0"><small>ID#</small> </label>
+                                                    <input type="text" class="form-control" name="vehicle_driver" id="driver_name">
+                                                </div>
+                                                <div class="mb-0">
+                                                    <label for="exampleFormControlInput1" class="form-label mb-0"><small>Driver Name</small> </label>
+                                                    <input type="text" class="form-control" name="vehicle_driver" id="driver_name">
+                                                </div>
+                                                <div class="mb-0">
+                                                    <label for="exampleFormControlInput1" class="form-label mb-0"><small>Upload Profile Picture:</small> </label>
+                                                    <input type="file filepond" name="file" id="uploadProfileImage">
+                                                </div>
+                                            </div>
                                         </div>
+
+                                   
+                                    
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>ID#</small> </label>
-                                            <input type="text" class="form-control" name="vehicle_driver" id="driver_name">
+                                        <div class="card" style="border: 1px solid #f2f2f2">
+                                            <div class="card-body">
+                                                <p class="mb-0" style="font-weight: bold;font-size:20px; ">Driver License Driver</p>
+                                                <div class="mb-0">
+                                                    <label for="exampleFormControlInput1" class="form-label mb-0"><small>License Exp Date</small> </label>
+                                                    <input type="date" class="form-control" name="driver_contact" id="contact">
+                                                </div>
+                                                <div class="mb-0">
+                                                    <label for="exampleFormControlInput1" class="form-label mb-0"><small>License Type</small> </label>
+                                                    <select class="form-select" id="selectedDriverLicense" name="driver_license">
+                                                        <option selected disabled>Select Driver License</option>
+                                                        <option>Non Pro Driver Lisence </option>
+                                                        <option>Pro Driver Lisence </option>
+                                                     </select>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleFormControlInput1" class="form-label mb-0"><small>License Restriction</small> </label>
+                                                    <select class="form-select" id="selectedLicenseRestriction" name="driver_license_restriction">
+                                                        <option selected disabled>Select License Restriction</option>
+                                                        <option>A - Motorcycle</option>
+                                                        <option>A1 - Tricycle</option>
+                                                        <option>B - Vehicles up to 5,000 kgs. GVW/8 seats</option>
+                                                        <option>B1 - Vehicles up to 5,000 kgs. GVW/9 or more seats</option>
+                                                        <option>B2 - Vehicles carrying goods ≤ 3,500 kgs GVW</option>
+                                                        <option>C - Vehicles carrying goods >3,500 kgs GVW</option>
+                                                        <option>D - Bus > 5,000 kgs GVW/9 or more seats</option>
+                                                        <option>BE – Trailers ≤ 3,500 kgs</option>
+                                                        <option>CE - Articulated C > 3,500 kgs combined GVW</option>
+                                                     </select>
+                                                </div>
+                                                <div class="mb-0">
+                                                    <label for="exampleFormControlInput1" class="form-label mb-0"><small>Upload License Image:</small> </label>
+                                                    <input type="file filepond" name="file" id="uploadLincenseImage">
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>Driver Name</small> </label>
-                                            <input type="text" class="form-control" name="vehicle_driver" id="driver_name">
-                                        </div>
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>License Exp Date</small> </label>
-                                            <input type="date" class="form-control" name="driver_contact" id="contact">
-                                        </div>
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>License Type</small> </label>
-                                            <select class="form-select" id="selectedDriverLicense" name="driver_license">
-                                                <option selected disabled>Select Driver License</option>
-                                                <option>Non Pro Driver Lisence </option>
-                                                <option>Pro Driver Lisence </option>
-                                             </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>License Restriction</small> </label>
-                                            <select class="form-select" id="selectedLicenseRestriction" name="driver_license_restriction">
-                                                <option selected disabled>Select License Restriction</option>
-                                                <option>A - Motorcycle</option>
-                                                <option>A1 - Tricycle</option>
-                                                <option>B - Vehicles up to 5,000 kgs. GVW/8 seats</option>
-                                                <option>B1 - Vehicles up to 5,000 kgs. GVW/9 or more seats</option>
-                                                <option>B2 - Vehicles carrying goods ≤ 3,500 kgs GVW</option>
-                                                <option>C - Vehicles carrying goods >3,500 kgs GVW</option>
-                                                <option>D - Bus > 5,000 kgs GVW/9 or more seats</option>
-                                                <option>BE – Trailers ≤ 3,500 kgs</option>
-                                                <option>CE - Articulated C > 3,500 kgs combined GVW</option>
-                                             </select>
-                                        </div>
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>Upload License Image:</small> </label>
-                                            <input type="file filepond" name="file" id="uploadLincenseImage">
-                                        </div>
+                                 
+                                       
                                     </div>
                                 </div>
                             </div>

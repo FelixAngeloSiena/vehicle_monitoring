@@ -11,7 +11,7 @@
                 <div class="d-flex justify-content-between">
                     <h1 class="h3 mb-3"><strong>Vehicle</strong> Records</h1>
                     <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createVehicleModal" style="color:#fff;font-size:17px;font-weight:bold">
-                        <i class="fas fa-edit"></i> Create Vehicle</button>
+                        <i class="fas fa-edit"></i> Add another vehicle</button>
                 </div>
 
 

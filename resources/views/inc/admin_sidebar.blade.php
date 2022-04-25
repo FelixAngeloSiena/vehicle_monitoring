@@ -42,7 +42,7 @@
           </li>
 
           <li class="sidebar-item">
-            <a class="sidebar-link" href="{{route('vehicle.driver')}}">
+            <a class="sidebar-link" href="{{route('user.account')}}">
               <img src="https://img.icons8.com/material-outlined/26/ffffff/add-user-group-man-man.png"/>
                 <span class="align-middle">User Account</span>
             </a>

@@ -77,3 +77,9 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 
+
+Route::controller(AdminController::class)->group(function () {
+    Route::get('/user-accounts', 'user_accounts')->name('user.account');
+});
+
+
