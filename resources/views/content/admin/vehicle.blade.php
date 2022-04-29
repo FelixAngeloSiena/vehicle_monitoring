@@ -6,16 +6,13 @@
 
     <div class="container-fluid p-0">
         <div class="row">
-
             <div class="col-md-12">
                 <div class="d-flex justify-content-between">
                     <h1 class="h3 mb-3"><strong>Vehicle</strong> Records</h1>
-                    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createVehicleModal" style="color:#fff;font-size:17px;font-weight:bold">
-                        <i class="fas fa-edit"></i> Add another vehicle</button>
+                    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal"
+                        data-bs-target="#createVehicleModal" style="color:#fff;font-size:17px;font-weight:bold">
+                        <img src="https://img.icons8.com/external-anggara-glyph-anggara-putra/25/ffffff/external-edit-basic-ui-anggara-glyph-anggara-putra.png"/> Add another vehicle</button>
                 </div>
-
-
-
                 <div class="card">
                     <div class="card-body shadow-sm">
 
@@ -45,7 +42,7 @@
                                         <td>{{ $vehicle->mv_file_no }}</td>
                                         <td>{{ $vehicle->chasis_no }}</td>
                                         <td>{{ $vehicle->motor_no }}</td>
-                                        <td>{{ $vehicle->driver_id === null ? 'No Driver Assigned' : $vehicle->driver_name }}
+                                        <td>{{ $vehicle->driver_id === null ? 'No Driver Assigned' : $vehicle->name }}
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-primary"
@@ -80,8 +77,9 @@
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content" style="background-color:#F4F3EF">
-                <div class="d-flex justify-content-between p-3"  style="background-color: #3B7DDD;">
-                    <h5 class="modal-title" id="modal-reservation-title" style="color:#fff;font-size:20px;font-weight:bold">Vehicle Details</h5>
+                <div class="d-flex justify-content-between p-3" style="background-color: #3B7DDD;">
+                    <h5 class="modal-title" id="modal-reservation-title"
+                        style="color:#fff;font-size:20px;font-weight:bold">Vehicle Details</h5>
                     <i class="fas fa-times fa-2x" data-bs-dismiss="modal" style="cursor: pointer;color:#fff"></i>
                 </div>
                 <div class="modal-body">
@@ -97,15 +95,19 @@
                         <div class="col-lg-6">
                             <div class="card" style="border:solid 1px #cfcfcf">
                                 <div class="card-body">
+                            
                                     <div class="d-flex justify-content-between">
-                                        <h4 class="mb-0" style="font-size: 20px" id="vehicleName">Ford Ranger</h4>
-                                        <a type="button" id="openOffCanvas" class="btn position-relative px-2" style="border-radius:50%;background-color:#fff;box-shadow: 4px 1px 8px 0px rgba(0,0,0,0.44);border:solid 1px #cfcfcf">
-                                            <i class="fas fa-cog" style="font-size:20px;"></i>
-                                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                                 <i class="fas fa-bell"></i>
-                                             </span>
-                                         </a>
+                                        <h4 class="mb-0" style="font-size: 20px" id="vehicleName"></h4>
+                                        <a type="button" id="openOffCanvas" class="btn position-relative px-2 py-2"
+                                            style="border-radius:50%;background-color:#fff;box-shadow: 2px 1px 6px 0px rgba(104, 104, 104, 0.44);border:solid 1px #cfcfcf">
+                                            <img src="https://img.icons8.com/material-outlined/24/000000/settings--v1.png"/>
+                                            <span
+                                                class="position-absolute top-0 start-110 translate-middle badge rounded-pill bg-danger">
+                                                <i class="fas fa-bell"></i>
+                                            </span>
+                                        </a>
                                     </div>
+                                    <p style="line-height: 2px;font-weight: bold">Driver: <span style="font-weight:300;" id="vehicleDriver"></span></p>
                                     <hr>
 
                                     <div class="row mb-0">
@@ -188,8 +190,9 @@
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content" style="background-color:#F4F3EF">
-                <div class="d-flex justify-content-between p-3"  style="background-color: #3B7DDD;">
-                    <h5 class="modal-title" id="modal-reservation-title" style="color:#fff;font-size:20px;font-weight:bold">Create Vehicle</h5>
+                <div class="d-flex justify-content-between p-3" style="background-color: #3B7DDD;">
+                    <h5 class="modal-title" id="modal-reservation-title"
+                        style="color:#fff;font-size:20px;font-weight:bold">Create Vehicle</h5>
                     <i class="fas fa-times fa-2x" data-bs-dismiss="modal" style="cursor: pointer;color:#fff"></i>
                 </div>
                 <form id="vehicleForm">
@@ -368,9 +371,10 @@
     <div class="modal fade" id="assignedDriver" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content" style="background-color:#F4F3EF">
-                <div class="modal-header" style="background-color: #3B7DDD;">
-                    <h5 class="modal-title" id="modal-reservation-title" style="color:#fff;">Assigned Driver</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="d-flex justify-content-between p-3" style="background-color: #3B7DDD;">
+                    <h5 class="modal-title" id="modal-reservation-title"
+                        style="color:#fff;font-size:20px;font-weight:bold">Assigned Driver</h5>
+                    <i class="fas fa-times fa-2x" data-bs-dismiss="modal" style="cursor: pointer;color:#fff"></i>
                 </div>
 
                 <div class="modal-body">
@@ -384,7 +388,7 @@
                             aria-label="Default select example">
                             <option selected disabled>Select Driver</option>
                             @foreach ($drivers as $driver)
-                                <option value={{ $driver->id }}>{{ $driver->driver_name }}</option>
+                                <option value={{ $driver->id }}>{{ $driver->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -397,15 +401,17 @@
         </div>
     </div>
 
+
     {{-- ----------------------------------------
       Change Driver Vehicle Modal
  --------------------------------------- --}}
     <div class="modal fade" id="changeDriver" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content" style="background-color:#F4F3EF">
-                <div class="modal-header" style="background-color: #3B7DDD;">
-                    <h5 class="modal-title" id="modal-reservation-title" style="color:#fff;">Change Driver</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="d-flex justify-content-between p-3" style="background-color: #3B7DDD;">
+                    <h5 class="modal-title" id="modal-reservation-title"
+                        style="color:#fff;font-size:20px;font-weight:bold">Change Driver</h5>
+                    <i class="fas fa-times fa-2x" data-bs-dismiss="modal" style="cursor: pointer;color:#fff"></i>
                 </div>
 
                 <div class="modal-body">
@@ -415,9 +421,10 @@
                                 Drivers:</small> </label>
                         <select class="form-select" id="selectedChangeDriver" name="vehicle_change_driver"
                             aria-label="Default select example">
-                            <option selected disabled>Select Driver</option>
+                            <option selected disabled>
+                                {{ count($drivers) > 0 ? 'Select Driver' : 'No Drivers available' }}</option>
                             @foreach ($drivers as $driver)
-                                <option value={{ $driver->id }}>{{ $driver->driver_name }}</option>
+                                <option value={{ $driver->id }}>{{ $driver->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -577,7 +584,6 @@
         </div>
     </div>
 
-
     {{-- ----------------------------------------
     Registration Logs Modal
  -------------------------------------- --}}
@@ -612,7 +618,6 @@
             </div>
         </div>
     </div>
-
 
     {{-- -------------------------------------------
     Vehicle Preventive Maintenance Offcanvas
@@ -690,10 +695,10 @@
             </div>
         </div>
     </div>
+    
 @endsection
 @section('script')
     <script>
-
         //onchange function on company to select department
         $('#selectedCompany').on('change', () => {
             var vehicleCompanyId = $('#selectedCompany').val();
@@ -772,7 +777,6 @@
                 url: "{{ route('create.vehicle') }}",
                 data: data,
                 success: function(response) {
-                    console.log(response);
                     location.reload();
                     $('#createVehicleModal').modal('hide');
                     if (response.status == 'ERROR') {
@@ -807,8 +811,8 @@
                 .then(function(response) {
                     response.data.forEach(value => {
                         console.log(value);
-                      $('#vehicleTypeTemp').text(value.vehicle_type);
-                      $('#vehiclePlateNo').text(value.plate_no);
+                        $('#vehicleTypeTemp').text(value.vehicle_type);
+                        $('#vehiclePlateNo').text(value.plate_no);
                     });
                 })
                 .catch(function(error) {
@@ -936,6 +940,8 @@
             axios.get('/vehicle-details/' + $id)
                 .then(function(response) {
                     response.data.forEach(value => {
+
+                        $('#vehicleDriver').text(value.name == null ? 'No Driver Assigned'  : value.name);
                         $('#vehicleName').text(value.vehicle_type)
                         $('#vehiclePlateDetails').val(value.plate_no)
                         $('#vehicleModelDetails').val(value.vehicle_year_model)

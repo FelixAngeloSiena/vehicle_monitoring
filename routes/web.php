@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\VehicleController;  
+use App\Http\Controllers\RequestorController; 
 
 
 // ----------------------------------------------------------------------------
@@ -21,6 +22,9 @@ Route::middleware('auth')->group(function(){
 });
 
 
+// ----------------------------------------------------------------------------
+// Driver Routes Group
+// ---------------------------------------------------------------------------- 
 
 Route::middleware('auth')->group(function(){
     Route::controller(DriverController::class)->group(function () {
@@ -28,9 +32,31 @@ Route::middleware('auth')->group(function(){
         Route::get('/company/{id}', 'vehicle_company');
         Route::get('/vehicle/{id}', 'vehicle_plate_number');
         Route::post('/create-driver', 'create_driver')->name('create.driver');
+        Route::post('/driver/upload-profile', 'upload_profile')->name('upload.profile');
+        Route::delete('/driver/revert-profile', 'revert_profile')->name('revert.profile');
+        Route::post('/driver/upload-license', 'upload_license')->name('upload.license');
+        Route::delete('/driver/revert-license', 'revert_license')->name('revert.license');
+        
+        Route::get('/driver-dashboard', 'driver_dashboard')->name('driver.dashboard');
+        Route::get('/driver-schedule-logs', 'driver_schedule_logs')->name('driver.schedule.logs');
+        Route::get('/driver-profile', 'driver_profile')->name('driver.profile');
+        Route::get('/driver-retrieve-profile/{imageFile}', 'getImageFile')->name('image.profile.details');
     });
 });
 
+
+// ----------------------------------------------------------------------------
+// Requestor Routes Group
+// ---------------------------------------------------------------------------- 
+
+Route::middleware('auth')->group(function(){
+    Route::controller(RequestorController::class)->group(function () {
+        Route::get('/requestor-dashboard', 'requestor_dashboard')->name('requestor.dashboard');
+        Route::get('/requestor-request-logs', 'requestor_request_logs')->name('requestor.request.logs');
+        Route::post('/get-available-vehicle', 'get_available_vehicle')->name('available.vehicle');
+        Route::post('/get-vehicle-driver', 'get_vehicle_driver')->name('vehicle.driver.info');
+    });
+});
 
 
 
@@ -76,10 +102,14 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/logout', 'logout')->name('logout.attempt'); 
 });
 
-
+// ----------------------------------------------------------------------------
+//  Create User Accounts Routes Group
+// ----------------------------------------------------------------------------
 
 Route::controller(AdminController::class)->group(function () {
     Route::get('/user-accounts', 'user_accounts')->name('user.account');
+    Route::post('/create-users', 'create_users')->name('create.user');
+
 });
 
 

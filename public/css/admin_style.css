@@ -11023,7 +11023,7 @@ body {
 }
 .sidebar,
 .sidebar-content {
-  background: #074995;
+  background: #251D3A;
   transition: margin-left 0.35s ease-in-out, left 0.35s ease-in-out,
     margin-right 0.35s ease-in-out, right 0.35s ease-in-out;
 }
@@ -11040,7 +11040,7 @@ body {
 }
 .sidebar-link,
 a.sidebar-link {
-  background: #074995;
+  background: #251D3A;
   border-left: 3px solid transparent;
   color: rgba(233, 236, 239, 0.5);
   cursor: pointer;
@@ -12397,4 +12397,13 @@ Dashboard
 .filepond--root *:not(text) {
   font-size: 12px!important;
   font-family: 'Kanit', sans-serif!important;
+}
+
+.field-icon {
+  float: right;
+  margin-top: -25px;
+  position: relative;
+  z-index: 2;
+  margin-right: 10px;
+  font-size: 20px;
 }

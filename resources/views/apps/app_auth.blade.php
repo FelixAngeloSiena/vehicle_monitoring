@@ -12,7 +12,7 @@
       <link href="{{asset('css/auth_style.css')}}" rel="stylesheet">
     </head>
 
-      <body class="antialiased">
+      <body class="antialiased" style="font-family: 'Kanit', sans-serif;">
         @yield('content')
       </body>
       
@@ -22,3 +22,5 @@
     <script src="{{asset('js/global_function.js')}}"></script>
    @yield('script')
 </html>
+
+

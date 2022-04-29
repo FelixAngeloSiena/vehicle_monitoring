@@ -13,16 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('drivers', function (Blueprint $table) {
+        Schema::create('reservations', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('vehicle_id');
             $table->unsignedInteger('user_id');
-            $table->string('id_no');
-            $table->string('profile_image_path');
-            $table->string('license_image_path');
-            $table->string('license_type');
-            $table->string('license_reg_date');
-            $table->string('license_exp_date');
-            $table->string('restriction');
+            $table->string('reservation_date');
             $table->timestamps();
         });
     }
@@ -34,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('drivers');
+        Schema::dropIfExists('reservations');
     }
 };

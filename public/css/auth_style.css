@@ -3,18 +3,16 @@
     font-family: 'Kanit', sans-serif;
     font-weight:500;
 }
-.card-header{
-    background: #074995;
-    color:#dfe0e2;
-}
+
 
 .btn-login{
-    background-color: #074995;
+    background-color: #251D3A;
     color:#fff;
+    box-shadow: 7px 8px 7px -10px rgba(0,0,0,0.14);
 }
 
 .btn-login:hover{
-    background-color: #074995;
+    background-color:#33294b;
     color:#fff;
 }
 
@@ -22,20 +20,21 @@
 .card-login{
     position: relative;
     font-family: 'Kanit', sans-serif;
+    border-radius: 0px;
+    border: 1px solid #251D3A;
 }
 
-.card-login::before{
-    content: "";
-    background: #4a73a1;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    left: 15px;
-    top:13px;
 
-}
 .form-check-input:focus{
     box-shadow: none;
 }
 
+#userInput, #passwordInput{
+    border: 1px solid #251D3A;
+}
+#userInput:focus{
+    box-shadow: none;
+}
+#passwordInput:focus{
+    box-shadow: none;
+}

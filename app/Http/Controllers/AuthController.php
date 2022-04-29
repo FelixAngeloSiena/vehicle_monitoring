@@ -23,7 +23,17 @@ class AuthController extends Controller
 
         try {
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-                return redirect()->route('admin_dashboard');
+                $checkRoles = Auth::user()->role;
+                if( $checkRoles == 'driver'){
+                    return redirect()->route('driver.dashboard'); 
+                }
+                if($checkRoles == 'logistic'){
+                    return redirect()->route('admin_dashboard');
+                }
+                if($checkRoles == 'requestor'){
+                    return redirect()->route('requestor.dashboard');
+                }
+                
             }
             Session::flash("error", "Invalid Credentials");
             return 'error';

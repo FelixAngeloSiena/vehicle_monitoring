@@ -25,14 +25,17 @@ class VehicleController extends Controller
 
         $vehicles = DB::table('vehicles')
         ->leftJoin('drivers', 'vehicles.driver_id', '=' ,'drivers.id')
+        ->leftJoin('users', 'drivers.user_id', '=', 'users.id')
         ->leftJoin('departments', 'vehicles.department_id', '=', 'departments.id')
         ->leftJoin('companies', 'departments.company_id', '=', 'companies.id')
-        ->select('vehicles.*', 'drivers.driver_name','departments.department_name','departments.company_id', 'companies.company_name')
+        ->select('vehicles.*','departments.department_name','departments.company_id', 'companies.company_name','users.name')
         ->get();
+
 
         $drivers = DB::table('drivers')
         ->leftJoin('vehicles', 'vehicles.driver_id', '=', 'drivers.id')
-        ->select('drivers.*', 'vehicles.driver_id')
+        ->leftJoin('users', 'drivers.user_id', '=', 'users.id')
+        ->select('drivers.*', 'vehicles.driver_id','users.name')
         ->whereNull('vehicles.driver_id')
         ->get();
 
@@ -66,7 +69,7 @@ class VehicleController extends Controller
 
       public function revert(Request $request) {
         try {
-            $fileId = $request()->getContent();
+            $fileId = request()->getContent();
             Storage::deleteDirectory('uploads/tmp/'.$fileId);
             TemporaryFile::where('folder', $fileId)->delete();
             return '';
@@ -150,6 +153,8 @@ class VehicleController extends Controller
 
       public function view($id){
         $vehicle = DB::table('vehicles')
+        ->leftJoin('drivers', 'vehicles.driver_id', '=', 'drivers.id')
+        ->leftJoin('users', 'drivers.user_id', '=', 'users.id')
         ->join('odo_meters','vehicles.id', '=', 'odo_meters.vehicle_id')
         ->join('vehicle_registrations', 'vehicles.id', '=' ,'vehicle_registrations.vehicle_id')
         ->join('batteries', 'vehicles.id', '=' ,'batteries.vehicle_id')
@@ -172,7 +177,8 @@ class VehicleController extends Controller
             'tires.rear_right_tire',
             'tires.date_replace AS tire_replaced',
             'pms.kilometer_odo',
-            'pms.date_of_pm'
+            'pms.date_of_pm',
+            'users.name',
            )
         ->get();
         return $vehicle;

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand navbar-light navbar-bg shadow-sm" style="font-family: 'Kanit', sans-serif;">
     <a class="sidebar-toggle js-sidebar-toggle">
-        <img src="https://img.icons8.com/ios-filled/20/074995/menu--v1.png"/>
+        <img src="https://img.icons8.com/plumpy/24/074995/menu--v1.png"/>
     </a>
     <div class="navbar-collapse collapse">
         <ul class="navbar-nav navbar-align">
