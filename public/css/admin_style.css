@@ -11079,8 +11079,8 @@ a.sidebar-link svg {
     rgba(59, 125, 221, 0.088) 50%,
     transparent
   );
-  border-left-color: #3b7ddd;
-  color: #e9ecef;
+  border-left-color: #FF0066;
+  color: #FF0066;
 }
 .sidebar-item.active .sidebar-link:hover i,
 .sidebar-item.active .sidebar-link:hover svg,
@@ -12376,13 +12376,13 @@ Dashboard
   display: none;
 }
 
-#odoLogs:hover, #registrationLogs:hover, #tiresLogs:hover ,#batteryLogs:hover, #pmsLogs:hover{
+#odoLogs:hover, #registrationLogs:hover, #tireLogs:hover ,#batteryLogs:hover, #pmsLogs:hover, #insuranceLogs:hover{
   box-shadow: 10px 10px 13px -7px rgba(0,0,0,0.35);
   transition: box-shadow 0.3s ease-in-out;
 
 }
 
-#odoLogs ,#registrationLogs ,#tireLogs, #batteryLogs, #pmsLogs{
+#odoLogs ,#registrationLogs ,#tireLogs, #batteryLogs, #pmsLogs, #insuranceLogs{
   cursor: pointer;
 }
 #icon-container{

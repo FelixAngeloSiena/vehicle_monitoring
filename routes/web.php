@@ -10,7 +10,7 @@ use App\Http\Controllers\RequestorController;
 
 
 // ----------------------------------------------------------------------------
-// Admin Routes Group
+// ADMIN ROUTE GROUD
 // ----------------------------------------------------------------------------               
 
 
@@ -23,7 +23,7 @@ Route::middleware('auth')->group(function(){
 
 
 // ----------------------------------------------------------------------------
-// Driver Routes Group
+// DRIVER ROUTE GROUP
 // ---------------------------------------------------------------------------- 
 
 Route::middleware('auth')->group(function(){
@@ -36,7 +36,6 @@ Route::middleware('auth')->group(function(){
         Route::delete('/driver/revert-profile', 'revert_profile')->name('revert.profile');
         Route::post('/driver/upload-license', 'upload_license')->name('upload.license');
         Route::delete('/driver/revert-license', 'revert_license')->name('revert.license');
-        
         Route::get('/driver-dashboard', 'driver_dashboard')->name('driver.dashboard');
         Route::get('/driver-schedule-logs', 'driver_schedule_logs')->name('driver.schedule.logs');
         Route::get('/driver-profile', 'driver_profile')->name('driver.profile');
@@ -46,7 +45,7 @@ Route::middleware('auth')->group(function(){
 
 
 // ----------------------------------------------------------------------------
-// Requestor Routes Group
+// REQUESTOR ROUTE GROUP
 // ---------------------------------------------------------------------------- 
 
 Route::middleware('auth')->group(function(){
@@ -68,32 +67,37 @@ Route::middleware('auth')->group(function(){
 
 
 // ----------------------------------------------------------------------------
-//  Vehicle Details Routes Group
+//  VEHICLE ROUTE GROUP
 // ----------------------------------------------------------------------------
 
 Route::middleware('auth')->group(function(){
-    Route::controller(VehicleController::class)->group(function () {
-        Route::get('/vehicles', 'vehicles')->name('vehicles');
-        Route::get('/vehicle-company/{id}', 'vehicles_company_id');
-        Route::post('vehicle/upload-image', 'upload')->name('upload.image');
-        Route::delete('vehicle/revert-image', 'revert')->name('revert.image');
-        Route::post('/vehicle-create', 'create')->name('create.vehicle');
-        Route::post('/vehicle-update', 'update')->name('update.vehicle.driver');
-        Route::post('/vehicle-change', 'change')->name('change.vehicle.driver');
-        Route::get('/vehicle-details/{id}', 'view')->name('view.vehicle.details');
-        Route::get('/vehicle-retrieve-imagefile/{imageFile}', 'getImageFile')->name('image.vehicle.details');
-        Route::get('/vehicle-odo-logs/{id}', 'odo_logs')->name('vehicle.odoLogs');
-        Route::get('/vehicle-tire-logs/{id}', 'tire_logs')->name('vehicle.tireLogs');
-        Route::get('/vehicle-registration-logs/{id}', 'registration_logs')->name('vehicle.registrationLogs');
-        Route::get('/vehicle-battery-logs/{id}', 'battery_logs')->name('vehicle.batteryLogs');
-        Route::get('/vehicle-pms-logs/{id}', 'pms_logs')->name('vehicle.pmsLogs');
-        
+    Route::controller(VehicleController::class)->prefix('vehicle')->group(function () {
+        Route::get('/', 'vehicles')->name('vehicles');
+        Route::get('/company/{id}', 'vehicles_company_id');
+        Route::post('/upload-image', 'upload')->name('upload.image');
+        Route::delete('/revert-image', 'revert')->name('revert.image');
+        Route::post('/create', 'create_vehicle')->name('create.vehicle');
+        Route::post('/update-driver', 'update_vehicle_driver')->name('update.vehicle.driver');
+        Route::post('/change-driver', 'change_vehicle_driver')->name('change.vehicle.driver');
+
+
+        Route::get('/details/{id}', 'vehicle_details')->name('vehicle.details');
+
+        Route::get('/assign-driver/{id}', 'show_assign_driver')->name('vehicle.driver.assigned');
+
+      
+        Route::get('/retrieve-imagefile/{imageFile}', 'getImageFile')->name('image.vehicle.details');
+        Route::get('/odo-logs/{id}', 'odo_logs')->name('vehicle.odoLogs');
+        Route::get('/tire-logs/{id}', 'tire_logs')->name('vehicle.tireLogs');
+        Route::get('/registration-logs/{id}', 'registration_logs')->name('vehicle.registrationLogs');
+        Route::get('/battery-logs/{id}', 'battery_logs')->name('vehicle.batteryLogs');
+        Route::get('/pms-logs/{id}', 'pms_logs')->name('vehicle.pmsLogs');
     });
 });
 
 
 // ----------------------------------------------------------------------------
-//  User Authentication Routes Group
+// USER AUTHENTICATION ROUTE GROUPS
 // ----------------------------------------------------------------------------
 
 Route::controller(AuthController::class)->group(function () {
@@ -102,8 +106,9 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/logout', 'logout')->name('logout.attempt'); 
 });
 
+
 // ----------------------------------------------------------------------------
-//  Create User Accounts Routes Group
+// USER ACCOUNTS ROUTE GROUP
 // ----------------------------------------------------------------------------
 
 Route::controller(AdminController::class)->group(function () {

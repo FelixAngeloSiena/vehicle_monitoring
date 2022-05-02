@@ -45,9 +45,13 @@
                                         <td>{{ $vehicle->driver_id === null ? 'No Driver Assigned' : $vehicle->name }}
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-primary"
+                                            {{-- <button type="button" class="btn btn-primary"
                                                 onclick="onClickVehicleDetail({{ $vehicle->id }})"><i
-                                                    class="fas fa-eye"></i> View Details</button>
+                                                    class="fas fa-eye"></i> View Details</button> --}}
+                                                    <a href="{{route('vehicle.details', $vehicle->id)}}" class="btn btn-primary">
+                                                        <i class="fas fa-eye"></i> 
+                                                        View Details
+                                                    </a>   
                                             @if ($vehicle->driver_id === null)
                                                 <button type="button" class="btn btn-danger"
                                                     onclick="onClickAssignedDriver({{ $vehicle->id }})"><i
@@ -68,120 +72,6 @@
             </div>
         </div>
     </div>
-
-    {{-- ----------------------------------------
-      Modal for Vehicle Details
- -------------------------------------- --}}
-
-    <div class="modal fade" id="vehicleDetailsModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content" style="background-color:#F4F3EF">
-                <div class="d-flex justify-content-between p-3" style="background-color: #3B7DDD;">
-                    <h5 class="modal-title" id="modal-reservation-title"
-                        style="color:#fff;font-size:20px;font-weight:bold">Vehicle Details</h5>
-                    <i class="fas fa-times fa-2x" data-bs-dismiss="modal" style="cursor: pointer;color:#fff"></i>
-                </div>
-                <div class="modal-body">
-                    <div class="row py-3">
-
-                        <input type="hidden" value="" id="vehicleIdForMaintenance">
-
-                        <div class="col-lg-6" style="position: relative">
-                            <div style=" position: absolute; top: 30%; ">
-                                <img id="imageFile" class="img-responsive" style="max-width:100%" />
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card" style="border:solid 1px #cfcfcf">
-                                <div class="card-body">
-                            
-                                    <div class="d-flex justify-content-between">
-                                        <h4 class="mb-0" style="font-size: 20px" id="vehicleName"></h4>
-                                        <a type="button" id="openOffCanvas" class="btn position-relative px-2 py-2"
-                                            style="border-radius:50%;background-color:#fff;box-shadow: 2px 1px 6px 0px rgba(104, 104, 104, 0.44);border:solid 1px #cfcfcf">
-                                            <img src="https://img.icons8.com/material-outlined/24/000000/settings--v1.png"/>
-                                            <span
-                                                class="position-absolute top-0 start-110 translate-middle badge rounded-pill bg-danger">
-                                                <i class="fas fa-bell"></i>
-                                            </span>
-                                        </a>
-                                    </div>
-                                    <p style="line-height: 2px;font-weight: bold">Driver: <span style="font-weight:300;" id="vehicleDriver"></span></p>
-                                    <hr>
-
-                                    <div class="row mb-0">
-                                        <div class="col-md-7">
-                                            <div class="mb-0">
-                                                <label for="exampleFormControlInput1"
-                                                    class="form-label mb-0"><small>Plate#:</small> </label>
-                                                <input type="text" class="form-control" value="" name="vehiclePlateInfo"
-                                                    id="vehiclePlateDetails">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="mb-0">
-                                                <label for="exampleFormControlInput1" class="form-label mb-0"><small>Year
-                                                        Model:</small> </label>
-                                                <input type="text" class="form-control" value=""
-                                                    name="vehicleModelDetails" id="vehicleModelDetails">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-0">
-                                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>MV
-                                                File#:</small> </label>
-                                        <input type="text" class="form-control" value="" name="vehicleMVFileDetails"
-                                            id="vehicleMVFileDetails">
-                                    </div>
-
-                                    <div class="mb-0">
-                                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>Motor#:</small>
-                                        </label>
-                                        <input type="text" class="form-control" value="" name="vehicleMotorDetails"
-                                            id="vehicleMotorDetails">
-                                    </div>
-
-                                    <div class="mb-0">
-                                        <label for="exampleFormControlInput1"
-                                            class="form-label mb-0"><small>Chasis#:</small> </label>
-                                        <input type="text" class="form-control" value="" name="vehicleChasisDetails"
-                                            id="vehicleChasisDetails">
-                                    </div>
-
-
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <div class="mb-0">
-                                                <label for="exampleFormControlInput1" class="form-label mb-0"><small>Current
-                                                        Odo Meter:</small> </label>
-                                                <input type="text" class="form-control" readonly value=""
-                                                    name="vehicleOdoDetails" id="vehicleOdoDetails">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="mb-0">
-                                                <label for="exampleFormControlInput1"
-                                                    class="form-label mb-0"><small>Registration Date:</small> </label>
-                                                <input type="text" class="form-control" value="" name="vehicleRegDetails"
-                                                    id="vehicleRegDetails" readonly>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-grid gap-2">
-                                        <button type="submit" class="btn btn-primary mb-3"> Update Vehicle Details </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     {{-- ----------------------------------------
       Modal for Create New Vehicle
  -------------------------------------- --}}
@@ -195,21 +85,52 @@
                         style="color:#fff;font-size:20px;font-weight:bold">Create Vehicle</h5>
                     <i class="fas fa-times fa-2x" data-bs-dismiss="modal" style="cursor: pointer;color:#fff"></i>
                 </div>
-                <form id="vehicleForm">
+                <form id="vehicle-form">
                     @csrf
                     <div class="modal-body">
 
                         <div class="card shadow" style="border:solid 1px #cfcfcf">
-                            <div class="card-body">
+                            <div class="card-body pb-1">
+
+                                <div class="row mb-0">
+                                    <div class="col-md-8">
+                  
+                                        <div class="card  mb-0" style="border:solid 1px #cfcfcf">
+                                            <div class="card-body py-2">
+                                                <label for="exampleFormControlInput1" class="form-label mb-0"><small>Select Vehicle Conditions:</small> </label>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="vehicleCondition" value="secondhand" id="vehicleCondition">
+                                                            <label class="form-check-label" for="flexRadioDisabled">
+                                                                <small> SecondHand Vehicle</small> 
+                                                            </label>
+                                                          </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="vehicleCondition" value="new" id="vehicleCondition">
+                                                            <label class="form-check-label" for="flexRadioDisabled">
+                                                              <small>New Vehicle</small> 
+                                                            </label>
+                                                          </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="row mb-0">
                                     <div class="col-md-4">
                                         <div class="mb-0">
-                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>Vehicle
-                                                    Type:</small> </label>
-                                            <input type="text" class="form-control" value="" name="vehicleType"
+                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>Vehicle Type:</small> </label>
+                                                    <input type="text" class="form-control" value="" name="vehicleType"
                                                 id="vehicleType">
                                         </div>
                                     </div>
+
+                            
                                     <div class="col-md-4">
                                         <div class="mb-0">
                                             <label for="exampleFormControlInput1" class="form-label mb-0"><small>Year
@@ -365,8 +286,8 @@
         </div>
     </div>
 
-    {{-- ----------------------------------------
-      Assigned Driver Vehicle Modal
+{{-- ----------------------------------------
+ASSIGN DRIVER VEHICLE MODAL
  -------------------------------------- --}}
     <div class="modal fade" id="assignedDriver" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -378,8 +299,8 @@
                 </div>
 
                 <div class="modal-body">
-                    <input type="hidden" value="" name="vehicle_id" id="vehicleId">
                     <div class="mb-3">
+                   
                         <p class="mb-0" id="vehicleTypeTemp" style="font-size:20px;"></p>
                         <p> Plate#: <span id="vehiclePlateNo"></span></p>
                         <label for="exampleFormControlInput1" class="form-label mb-0"><small> Available Drivers:</small>
@@ -402,8 +323,8 @@
     </div>
 
 
-    {{-- ----------------------------------------
-      Change Driver Vehicle Modal
+{{-- ----------------------------------------
+CHANGE DRIVER VEHICLE MODAL
  --------------------------------------- --}}
     <div class="modal fade" id="changeDriver" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -415,8 +336,9 @@
                 </div>
 
                 <div class="modal-body">
-                    <input type="hidden" value="" name="changeVehicleDriverId" id="changeVehicleDriverId">
                     <div class="mb-3">
+                        <p class="mb-0" id="vehicleTypeTemp" style="font-size:20px;"></p>
+                         <p> Plate#: <span id="vehiclePlateNo"></span></p>
                         <label for="exampleFormControlInput1" class="form-label mb-0"><small>Available
                                 Drivers:</small> </label>
                         <select class="form-select" id="selectedChangeDriver" name="vehicle_change_driver"
@@ -438,271 +360,16 @@
     </div>
 
 
-    {{-- ----------------------------------------
-    Odo Meter Logs Modal
- -------------------------------------- --}}
-    <div class="modal fade" id="odoLogsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content" style="background-color:#F4F3EF">
-                <div class="modal-header" style="background-color: #3B7DDD;">
-                    <h5 class="modal-title" id="modal-reservation-title" style="color:#fff;">Odo Meter Logs</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped" id="odoLogsInitTable" width="100%">
-                                            <thead style="width:100%">
-                                                <tr>
-                                                    <th>Vehicle Kilometer Odo</th>
-                                                    <th>Created_at</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="odoLogsTable">
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
-    {{-- ----------------------------------------
-    Tire Logs Modal
- -------------------------------------- --}}
-    <div class="modal fade" id="tireLogsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content" style="background-color:#F4F3EF">
-                <div class="modal-header" style="background-color: #3B7DDD;">
-                    <h5 class="modal-title" id="modal-reservation-title" style="color:#fff;">Tires Logs</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table class="table table-striped" id="tireLogsInitTable" style="width:100%">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Front Left Tire</th>
-                                                <th scope="col">Front Right Tire</th>
-                                                <th scope="col">Rear Left Tire</th>
-                                                <th scope="col">Rear Right Tire </th>
-                                                <th scope="col">Date Replace</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tireLogsTable">
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    {{-- ----------------------------------------
-    Battery Logs Modal
- -------------------------------------- --}}
-    <div class="modal fade" id="batteryLogsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content" style="background-color:#F4F3EF">
-                <div class="modal-header" style="background-color: #3B7DDD;">
-                    <h5 class="modal-title" id="modal-reservation-title" style="color:#fff;">Batteries Logs</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table class="table table-striped" id="batteryLogsInitTable" style="width:100%">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Vehicle Kilometer Odo</th>
-                                                <th scope="col">Created_at</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="batteryLogsTable">
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- ----------------------------------------
-    PMS Modal
- -------------------------------------- --}}
-    <div class="modal fade" id="pmsLogsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content" style="background-color:#F4F3EF">
-                <div class="modal-header" style="background-color: #3B7DDD;">
-                    <h5 class="modal-title" id="modal-reservation-title" style="color:#fff;">Preventive Maintenance Logs
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table class="table table-striped" id="pmsLogsInitTable" style="width:100%">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Vehicle Kilometer Odo</th>
-                                                <th scope="col">Date Of Preventive Maintenance</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="pmsLogsTable">
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- ----------------------------------------
-    Registration Logs Modal
- -------------------------------------- --}}
-    <div class="modal fade" id="registrationLogsModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content" style="background-color:#F4F3EF">
-                <div class="modal-header" style="background-color: #3B7DDD;">
-                    <h5 class="modal-title" id="modal-reservation-title" style="color:#fff;">Registration Logs</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table class="table table-striped" id="registrationLogsInitTable">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col"> Date Registered</th>
-                                                <th scope="col">Date Registration Expired</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="registrationLogsTable">
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- -------------------------------------------
-    Vehicle Preventive Maintenance Offcanvas
- ----------------------------------------------- --}}
-    <div class="offcanvas offcanvas-bottom" id="OdoLogRecords" aria-labelledby="offcanvasBottomLabel"
-        style="background-color: #F4F3EF;">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasBottomLabel"></h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body small">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="card" id="odoLogs" onclick="">
-                            <div class="card-body px-2 py-3">
-                                <div id="icon-container">
-                                    <img src="{{ asset('img/odo_icon.png') }}" style="max-width: 60%"
-                                        class="img-responsive">
-                                </div>
-                                <h4 class="mb-0 text-center" id="icon-title">Odo Kilometers</h4>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="card" id="registrationLogs">
-                            <div class="card-body px-2 py-3">
-                                <div id="icon-container">
-                                    <img src="{{ asset('img/registration_icon.png') }}" style="max-width: 60%"
-                                        class="img-responsive">
-                                </div>
-                                <h4 class="mb-0 text-center" id="icon-title">Registration</h4>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="card" id="tireLogs">
-                            <div class="card-body">
-                                <div id="icon-container">
-                                    <img src="{{ asset('img/tire_icon.png') }}" style="max-width: 65%"
-                                        class="img-responsive">
-                                </div>
-                                <h4 class="mb-0 text-center" id="icon-title">Tires</h4>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="card" id="batteryLogs">
-                            <div class="card-body">
-                                <div id="icon-container">
-                                    <img src="{{ asset('img/battery_icon.png') }}" style="max-width: 65%"
-                                        class="img-responsive">
-                                </div>
-                                <h4 class="mb-0 text-center" id="icon-title">Battery</h4>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="card" id="pmsLogs">
-                            <div class="card-body">
-                                <div id="icon-container">
-                                    <img src="{{ asset('img/pms_icon.png') }}" style="max-width: 65%"
-                                        class="img-responsive">
-                                </div>
-                                <h4 class="mb-0 text-center" id="icon-title">PMS</h4>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
     
 @endsection
 @section('script')
     <script>
-        //onchange function on company to select department
+        //ONCHANGE FUNCTION OF COMPANY TO SHOW HIS DEPARTMENT
         $('#selectedCompany').on('change', () => {
             var vehicleCompanyId = $('#selectedCompany').val();
-            axios.get('/vehicle-company/' + vehicleCompanyId)
+            axios.get('/vehicle/company/' + vehicleCompanyId)
                 .then(function(response) {
                     $('#selectedDepartment').empty();
                     $('#selectedDepartment').append('<option selected disabled>Select Department</option>');
@@ -716,7 +383,7 @@
                 })
         })
 
-        //file upload using filepond
+        //FILE UPLOAD USING FILEPOND JS
         var pond = FilePond.create(document.getElementById("uploadVehicleImage"), {
             acceptedFileTypes: ['image/*'],
             maxFileSize: "40",
@@ -755,8 +422,8 @@
             },
         });
 
-        //submit form of adding new vehicle
-        $('#vehicleForm').on('submit', (e) => {
+        //SUBMIT FUNCTION TO CREATE ANOTHER VEHICLE
+        $('#vehicle-form').on('submit', (e) => {
             e.preventDefault();
 
             var swal = Swal.fire({
@@ -771,13 +438,14 @@
                 }
             });
 
-            var data = $('#vehicleForm').serializeArray();
+            var data = $('#vehicle-form').serializeArray();
             $.ajax({
                 type: "POST",
                 url: "{{ route('create.vehicle') }}",
                 data: data,
                 success: function(response) {
-                    location.reload();
+                    console.log(response);
+                    // location.reload();
                     $('#createVehicleModal').modal('hide');
                     if (response.status == 'ERROR') {
                         Swal.fire({
@@ -804,10 +472,9 @@
             });
         });
 
-        //get Id of Vehicle to assigned vehicle Driver
-        const onClickAssignedDriver = ($id) => {
-            $('#vehicleId').val($id);
-            axios.get('/vehicle-details/' + $id)
+        //GET ID OF VEHICLE TO ASSIGNED VEHICLE DRIVE
+        const onClickAssignedDriver = (id) => {
+            axios.get('/vehicle/assign-driver/'+id)
                 .then(function(response) {
                     response.data.forEach(value => {
                         console.log(value);
@@ -818,17 +485,26 @@
                 .catch(function(error) {
                     console.log(error);
                 })
-
             $('#assignedDriver').modal('show');
         }
 
-        //get Id of Vehicle to change vehicle Driver
-        const onClickChangeDriver = ($id) => {
-            $('#changeVehicleDriverId').val($id);
+          //GET ID OF VEHICLE TO ASSIGNED VEHICLE DRIVE
+        const onClickChangeDriver = (id) => {
+            axios.get('/vehicle/assign-driver/'+id)
+                .then(function(response) {
+                    response.data.forEach(value => {
+                        console.log(value);
+                        $('#vehicleTypeTemp').text(value.vehicle_type);
+                        $('#vehiclePlateNo').text(value.plate_no);
+                    });
+                })
+                .catch(function(error) {
+                    console.log(error);
+                })
             $('#changeDriver').modal('show');
         }
 
-        //submit button for vehicle change driver
+        //SUBMIT FUNCTION TO CHANGE DRIVER
         $('#submitChangeDriver').on('click', () => {
             var selectedChangeDriverId = $('#selectedChangeDriver').val();
             var changeVehicleDriver = $('#changeVehicleDriverId').val();
@@ -881,7 +557,7 @@
             });
         })
 
-        //submit button for vehicle driver assigned
+        //SUBMIT FUNCTION TO ASSIGNED DRIVER
         $('#submitDriverAssigned').on('click', () => {
             var selectedDriverId = $('#selectedDriver').val();
             var vehicleId = $('#vehicleId').val();
@@ -934,142 +610,9 @@
             });
         })
 
-        // get vehicle information
-        const onClickVehicleDetail = ($id) => {
-            $('#vehicleDetailsModal').modal('show');
-            axios.get('/vehicle-details/' + $id)
-                .then(function(response) {
-                    response.data.forEach(value => {
 
-                        $('#vehicleDriver').text(value.name == null ? 'No Driver Assigned'  : value.name);
-                        $('#vehicleName').text(value.vehicle_type)
-                        $('#vehiclePlateDetails').val(value.plate_no)
-                        $('#vehicleModelDetails').val(value.vehicle_year_model)
-                        $('#vehicleMVFileDetails').val(value.mv_file_no)
-                        $('#vehicleMotorDetails').val(value.motor_no)
-                        $('#vehicleChasisDetails').val(value.chasis_no)
-                        $('#vehicleOdoDetails').val(value.current_odo)
-                        $('#vehicleRegDetails').val(value.date_registration)
-                        $('#imageFile').attr('src', "/vehicle-retrieve-imagefile/" + value.image_path);
-                        $('#vehicleIdForMaintenance').val(value.id);
-                    });
-                })
-        }
 
-        //open OffCanvas
-        $('#openOffCanvas').on('click', function() {
-            $('#OdoLogRecords').offcanvas('show');
-            $('#vehicleDetailsModal').modal('hide');
-        })
 
-        //get request OdoLogs of vehicle using axios
-        $('#odoLogs').on('click', function() {
-            $('#odoLogsModal').modal('show');
-            var id = $('#vehicleIdForMaintenance').val();
-            axios.get('/vehicle-odo-logs/' + id)
-                .then(function(response) {
-                    $('#odoLogsTable').empty();
-                    response.data.forEach(value => {
-                        var dateObj = new Date(value.created_at);
-                        var month = dateObj.getUTCMonth() + 1; //months from 1-12
-                        var day = dateObj.getUTCDate();
-                        var year = dateObj.getUTCFullYear();
-                        var updatedOdoDate = year + "-" + month + "-" + day;
-                        $('#odoLogsTable').append('<tr><td>' + value.current_odo + '</td><td>' +
-                            updatedOdoDate + '</td></tr>')
-                    });
-                    $('#odoLogsInitTable').DataTable({
-                        "destroy": true,
-                        "order": [
-                            [1, "desc"]
-                        ]
-                    });
-                })
-                .catch(function(error) {
-                    console.log(error);
-                })
-        })
-
-        //get request Tire Log of vehicle using axios
-        $('#tireLogs').on('click', function() {
-            $('#tireLogsModal').modal('show');
-            var id = $('#vehicleIdForMaintenance').val();
-            axios.get('/vehicle-tire-logs/' + id)
-                .then(function(response) {
-                    $('#tireLogsTable').empty();
-                    response.data.forEach(value => {
-                        $('#tireLogsTable').append('<tr><td>' + value.front_left_tire + '</td><td>' +
-                            value.front_right_tire + '</td><td>' + value.rear_left_tire +
-                            '</td><td>' + value.rear_right_tire + '</td><td>' + value.date_replace +
-                            '</td></tr>')
-                    });
-                    $('#tireLogsInitTable').DataTable({
-                        "destroy": true,
-                    });
-                })
-                .catch(function(error) {
-                    console.log(error);
-                })
-        })
-
-        //get request Battery Log of vehicle using axios
-        $('#batteryLogs').on('click', function() {
-            $('#batteryLogsModal').modal('show');
-            var id = $('#vehicleIdForMaintenance').val();
-            axios.get('/vehicle-battery-logs/' + id)
-                .then(function(response) {
-                    $('#batteryLogsTable').empty();
-                    response.data.forEach(value => {
-                        $('#batteryLogsTable').append('<tr><td>' + value.brand_name + '</td><td>' +
-                            value.date_replace + '</td></tr>')
-                    });
-                    $('#batteryLogsInitTable').DataTable({
-                        "destroy": true,
-                    });
-                })
-                .catch(function(error) {
-                    console.log(error);
-                })
-        })
-
-        //get request Tire Log of vehicle using axios
-        $('#pmsLogs').on('click', function() {
-            $('#pmsLogsModal').modal('show');
-            var id = $('#vehicleIdForMaintenance').val();
-            axios.get('/vehicle-pms-logs/' + id)
-                .then(function(response) {
-                    $('#pmsLogsTable').empty();
-                    response.data.forEach(value => {
-                        $('#pmsLogsTable').append('<tr><td>' + value.kilometer_odo + '</td><td>' + value
-                            .date_of_pm + '</td></tr>')
-                    });
-                    $('#pmsLogsInitTable').DataTable({
-                        "destroy": true,
-                    });
-                })
-                .catch(function(error) {
-                    console.log(error);
-                })
-        })
-
-        //get request Registration Log of vehicle using axios
-        $('#registrationLogs').on('click', function() {
-            $('#registrationLogsModal').modal('show');
-            var id = $('#vehicleIdForMaintenance').val();
-            axios.get('/vehicle-registration-logs/' + id)
-                .then(function(response) {
-                    $('#registrationLogsTable').empty();
-                    response.data.forEach(value => {
-                        $('#registrationLogsTable').append('<tr><td>' + value.date_registration +
-                            '</td><td>' + value.date_expired + '</td></tr>')
-                    });
-                    $('#registrationLogsInitTable').DataTable({
-                        "destroy": true,
-                    });
-                })
-                .catch(function(error) {
-                    console.log(error);
-                })
-        })
+     
     </script>
 @endsection

@@ -57,37 +57,37 @@
     @elseif (Auth::user()->role == 'logistic')
           <li class="sidebar-item {{ request()->routeIs('admin_dashboard') ? 'active' : '' }}">
               <a class="sidebar-link" href="{{route('admin_dashboard')}}">
-                <img src="https://img.icons8.com/stickers/35/000000/dashboard-layout.png"/>
-                  <span class="align-middle" style="font-weight: bold;font-size:18px;">Dashboard</span>
+                <ion-icon name="podium-outline" class="align-middle" style="font-size: 20px;"></ion-icon>
+                  <span class="align-middle" style="font-size:18px;">Dashboard</span>
               </a>
           </li>
 
           <li class="sidebar-item {{ request()->routeIs('vehicle.reservation') ? 'active' : '' }}">
               <a class="sidebar-link" href="{{route('vehicle.reservation')}}">
-                <img src="https://img.icons8.com/stickers/35/000000/calendar.png"/>
-                  <span class="align-middle" style="font-weight: bold;font-size:18px;">Vehicle Reservation</span>
+                <ion-icon name="calendar-clear-outline" class="align-middle"  style="font-size: 18px;"></ion-icon>
+                  <span class="align-middle" style="font-size:18px;">Reservations</span>
               </a>
           </li>
 
           <li class="sidebar-item {{ request()->routeIs('vehicles') ? 'active' : '' }}">
               <a class="sidebar-link" href="{{route('vehicles')}}">
-                <img src="https://img.icons8.com/stickers/35/000000/sedan.png"/>
-                  <span class="align-middle" style="font-weight: bold;font-size:18px;"> Vehicle Records</span>
+                <ion-icon name="car-outline" class="align-middle" style="font-size: 22px;"></ion-icon>
+                  <span class="align-middle" style="font-size:18px;"> Vehicles</span>
               </a>
           </li>
 
           
           <li class="sidebar-item {{ request()->routeIs('vehicle.driver') ? 'active' : '' }}">
             <a class="sidebar-link" href="{{route('vehicle.driver')}}">
-              <img src="https://img.icons8.com/stickers/35/000000/driver.png"/>
-                <span class="align-middle" style="font-weight: bold;font-size:18px;"> Driver Records</span>
+              <ion-icon name="timer-outline" class="align-middle"  style="font-size: 22px;"></ion-icon>
+                <span class="align-middle" style="font-size:18px;"> Drivers</span>
             </a>
         </li>
 
         <li class="sidebar-item {{ request()->routeIs('user.account') ? 'active' : '' }}">
           <a class="sidebar-link" href="{{route('user.account')}}">
-            <img src="https://img.icons8.com/stickers/35/000000/add-user-group-man-man.png"/>
-              <span class="align-middle" style="font-weight: bold;font-size:18px;">User Account</span>
+            <ion-icon name="person-add-outline" class="align-middle"  style="font-size: 20px;"></ion-icon>
+              <span class="align-middle" style="font-size:18px;">User Account</span>
           </a>
       </li>
       @endif

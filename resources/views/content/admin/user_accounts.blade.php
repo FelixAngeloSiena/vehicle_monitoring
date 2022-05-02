@@ -77,7 +77,6 @@ Add another user Modal
                                 <option value="logistic">Logistic</option>
                                 <option value="purchasing">Purchasing</option>
                                 <option value="requestor">Requestor</option>
-                                <option value="driver">Driver</option>
                                 <option value="manager">Warehouse Manager</option>
                             </select>
                         </div>
