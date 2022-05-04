@@ -50,6 +50,7 @@ class VehicleController extends Controller
         ->get();
         return $departments;       
     }   
+
   //UPLOAD IMAGE OF VEHICLE
     public function upload(Request $request) {
       if($request->hasFile('file')) {
@@ -195,7 +196,7 @@ class VehicleController extends Controller
       return view('content.vehicle.vehicle_details',compact('vehicles','id'));
     }
 
-
+  //RETURN VEHICLE DETAILS WHEN ASSIGN DRIVER TO MODAL
     public function show_assign_driver($id){
       $vehicleDetails = Vehicle::select('vehicle_type', 'plate_no')
       ->where('id', $id)
