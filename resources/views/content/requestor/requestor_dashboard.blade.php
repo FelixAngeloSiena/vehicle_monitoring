@@ -9,165 +9,204 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body shadow-sm">
-                        <div class="img-sched d-flex justify-content-center">
-                            <lottie-player src="https://assets6.lottiefiles.com/temporary_files/PH5YkW.json"  background="transparent"  speed="1"  style="max-width:50%;"  loop  autoplay></lottie-player>
-                        </div>
-                        <p class="text-center" style="font-size: 20px;">No Reservation Found Today!</p>
-                        <div class="img-sched d-flex justify-content-center">
-                            <button type="button" class="btn mb-3" data-bs-toggle="modal"
-                            data-bs-target="#request_vehicle"  style="color:#fff;font-size:16px;font-weight:700;background-color:#074995;">
-                                <img src="https://img.icons8.com/external-anggara-glyph-anggara-putra/25/ffffff/external-edit-basic-ui-anggara-glyph-anggara-putra.png"/> Request Vehicle</button>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-
-            {{-- <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body shadow-sm">
-                        <p style="font-size: 20px;"><img src="https://img.icons8.com/external-anggara-glyph-anggara-putra/25/000000/external-edit-basic-ui-anggara-glyph-anggara-putra.png"/> Request Schedule</p>
-                        
-                      
-                        <div class="mb-0">
-                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>Date Needed:</small> </label>
-                            <input type="date" class="form-control" name="vehicle_plate"  id="plate_number" value="">
-                        </div>
-
                         <div class="row">
-                            <div class="col-md-8">
-                                <div class="mb-0">
-                                    <label for="exampleFormControlInput1" class="form-label mb-0"><small>Available Vehicle:</small> </label>
-                                    <select class="form-select" id="selectedCompany" name="vehicle_company"
-                                    aria-label="Default select example">
-                                    <option selected disabled>Select Vehicle</option>
-                             
-                                </select>
-                                </div>
+                            <div class="col-md-7">
+                                @if (count($scheduleTodays) > 0)
+                                <p style="font-size: 20px;font-weight:bold">Your Reservation Today</p>
+                                    @foreach ($scheduleTodays as $scheduleToday)
+                                    <div class="alert alert-success" role="alert">
+                                        <p class="mb-0" style="font-size:25px;font-weight:bold">{{date('d M Y', strtotime($scheduleToday->reservation_date)) }}</p>
+                                        <p class="mb-0" style="font-size:20px;">Vehicle: {{$scheduleToday->vehicle_type}}</p>
+                                        <p class="mb-0" style="font-size:20px;">Vehicle Plate#: {{$scheduleToday->plate_no}}</p>
+                                        <p class="mb-0" style="font-size:20px;">Driver ID#: {{$scheduleToday->id_no}}</p>
+                                        <p class="mb-0" style="font-size:20px;">Driver Name: {{$scheduleToday->name}}</p>
+                                      </div>
+                                    @endforeach
+                                @else
+                                    <div class="img-sched d-flex justify-content-center">
+                                        <lottie-player src="https://assets6.lottiefiles.com/temporary_files/PH5YkW.json"
+                                            background="transparent" speed="1" style="max-width:100%;" loop autoplay>
+                                        </lottie-player>
+                                    </div>
+
+                                        <p class="mb-0 text-center" class="text-center">No Reservation Found Today!</p>
+                                   
+                                @endif
                             </div>
-                            <div class="col-md-4">
-                                <div class="mb-0">
-                                    <label for="exampleFormControlInput1" class="form-label mb-0"><small>Vehicle Plate#:</small> </label>
-                                    <input type="text" class="form-control" value="" readonly name="vehicleModel"
-                                    id="vehicleModel">
-                                </div>
+
+
+                            <div class="col-md-5">
+                                <div class="card" style="border:solid 1px #cfcfcf">
+                                    <div class="card-body">
+                                        <p style="font-size:25px;font-weight:bold">Request Schedule for Vehicle</p>
+                                <form id="createReservation">
+                                    @csrf
+                                    <input type="hidden" value="" id="userId" name="userId">
+                                    <input type="hidden" value="" id="vehicleId" name="vehicleId">
+                                    <input type="hidden" value="" id="dateReserve" name="dateReserve">
+                                    <div class="mb-0">
+                                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>Date
+                                                Needed:</small> </label>
+                                        <input type="date" min="{{now()->format('Y-m-d')}}" class="form-control" name="date_reservation"
+                                            id="date_reservation" value="">
+                                    </div>
+
+
+                                    <div class="mb-0">
+                                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>Company</small> </label>
+                                        <select class="form-select" id="company" name="company"
+                                            aria-label="Default select example">
+                                            <option selected disabled>Select Company</option>
+                                            @foreach ($companies as $company)
+                                             <option value="{{$company->id}}">{{ $company->company_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+
+
+                                    <div class="mb-0">
+                                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>Available
+                                                Vehicle:</small> </label>
+                                        <select class="form-select" id="availableVehicle" name="availableVehicle"
+                                            aria-label="Default select example">
+                                            <option selected disabled>Select Vehicle</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="mb-0">
+                                                <label for="exampleFormControlInput1" class="form-label mb-0"><small>Driver
+                                                        Id#:</small> </label>
+                                                <input type="text" class="form-control" name="driver_id" readonly
+                                                    id="driver_id" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="mb-0">
+                                                <label for="exampleFormControlInput1" class="form-label mb-0"><small>Driver
+                                                        Name:</small> </label>
+                                                <input type="text" class="form-control" name="driver_name" readonly
+                                                    id="driver_name" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-0">
+                                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>License
+                                                Type:</small> </label>
+                                        <input type="text" class="form-control" name="driver_license_type" readonly
+                                            id="driver_license_type" value="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>License
+                                                Restriction:</small> </label>
+                                        <input type="text" class="form-control" name="driver_license_restriction" readonly
+                                            id="driver_license_restriction" value="">
+                                    </div>
+
+                                    <div class="d-grid gap-2">
+                                        <button type="submit" class="btn btn-primary mb-3"><img
+                                                src="https://img.icons8.com/external-anggara-glyph-anggara-putra/25/ffffff/external-edit-basic-ui-anggara-glyph-anggara-putra.png" />
+                                            Submit Request </button>
+                                    </div>
                             </div>
+                            </form>
+                                    </div>
+                                </div>
+
                         </div>
 
-                    
-                  
                     </div>
-                </div>
-            </div> --}}
 
-        </div>
-    </div>
-
-<div class="modal fade" id="request_vehicle" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content" style="background-color:#F4F3EF">
-            <div class="d-flex justify-content-between p-3" style="background-color: #3B7DDD;">
-                <h5 class="modal-title" id="modal-reservation-title"
-                    style="color:#fff;font-size:20px;font-weight:bold">Request Vehicle</h5>
-                <i class="fas fa-times fa-2x" data-bs-dismiss="modal" style="cursor: pointer;color:#fff"></i>
-            </div>
-            <div class="modal-body ">
-                <div class="row mx-3">
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                          
-                            <div class="mb-0">
-                                <label for="exampleFormControlInput1" class="form-label mb-0"><small>Date Needed:</small> </label>
-                                <input type="date" class="form-control" name="date_reservation"  id="date_reservation" value="">
-                            </div>
-    
-                     
-                         
-                                    <div class="mb-0">
-                                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>Available Vehicle:</small> </label>
-                                        <select class="form-select" id="availableVehicle" name="availableVehicle"
-                                        aria-label="Default select example">
-                                        <option selected disabled>Select Vehicle</option>
-                                 
-                                    </select>
-                                    </div>
-                            
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="mb-0">
-                                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>Driver Id#:</small> </label>
-                                        <input type="text" class="form-control" name="driver_id" readonly  id="driver_id" value="">
-                                    </div>
-                                </div>
-                                <div class="col-md-10">
-                                    <div class="mb-0">
-                                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>Driver Name:</small> </label>
-                                        <input type="text" class="form-control" name="driver_name" readonly  id="driver_name" value="">
-                                    </div>
-                                </div>
-                            </div>
-                        
-                            <div class="mb-0">
-                                <label for="exampleFormControlInput1" class="form-label mb-0"><small>License Type:</small> </label>
-                                <input type="text" class="form-control" name="driver_license_type" readonly id="driver_license_type" value="">
-                            </div>
-                            <div class="mb-0">
-                                <label for="exampleFormControlInput1" class="form-label mb-0"><small>License Restriction:</small> </label>
-                                <input type="text" class="form-control" name="driver_license_restriction" readonly id="driver_license_restriction" value="">
-                            </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
 
 
 @endsection
 @section('script')
-<script>
-    $('#date_reservation').on('change',()=> {
-        var date_reservation = $('#date_reservation').val();
-        $.ajax({
+    <script>
+
+        $('#date_reservation').on('change', () => {
+            var date_reservation = $('#date_reservation').val();
+            $('#dateReserve').val(date_reservation);
+        })
+
+
+        $('#company').on('change',() => {
+            var companyId = $('#company').val();
+            var dateReserve =  $('#dateReserve').val();
+            
+            $.ajax({
                 type: "POST",
                 url: "{{ route('available.vehicle') }}",
                 data: {
                     "_token": "{{ csrf_token() }}",
-                    "date": date_reservation
-                    },
-                     success: function(response) {
-                        $('#availableVehicle').empty();
-                        response.forEach(value => {
-                        $('#availableVehicle').append('<option value="'+value.id+'">'+value.vehicle_type+' - '+value.plate_no+'</option>');
-                   
-                    });
+                    "company_id": companyId,
+                    "date_reserve":dateReserve
+                },
+                success: function(response) {
+                    $('#availableVehicle').empty();
+                    $('#availableVehicle').append(' <option selected disabled>Select Vehicle</option>')   
+                    $.each(response, function(index, data) {
+                         $('#availableVehicle').append('<option value="'+data.id+'">'+data.vehicle_type+ '</option>')   
+                    })
                 }
             });
+            
         })
 
-        $('#availableVehicle').on('change',() => {
+
+        $('#availableVehicle').on('change', () => {
             var vehicleId = $('#availableVehicle').val();
             $.ajax({
                 type: "POST",
-                url: "{{ route('vehicle.driver.info')}}",
+                url: "{{ route('vehicle.driver.info') }}",
                 data: {
                     "_token": "{{ csrf_token() }}",
                     "id": vehicleId
-                    },
-                     success: function(response) {
-                        response.forEach(value => {
-                         $('#driver_id').val(value.id_no);
-                         $('#driver_name').val(value.name);
-                         $('#driver_license_type').val(value.license_type);
-                         $('#driver_license_restriction').val(value.restriction);
-                    });
-                
-                        
+                },
+                success: function(response) {
+                    $.each(response, function(index, data) {
+                        $('#userId').val(data.userID);
+                        $('#vehicleId').val(data.vehicleID);
+                        $('#driver_id').val(data.id_no);
+                        $('#driver_name').val(data.name);
+                        $('#driver_license_type').val(data.license_type);
+                        $('#driver_license_restriction').val(data.restriction);
+                    })
+                }
+            });
+        });
+
+
+
+        $('#createReservation').on('submit', (e) => {
+            e.preventDefault();
+            var swal = Swal.fire({
+                title: 'Please Wait',
+                text: 'Saving New Driver in database ...',
+                icon: 'info',
+                allowOutsideClick: false,
+                showCancelButton: false,
+                showConfirmButton: false,
+                didOpen: () => {
+                    Swal.showLoading();
                 }
             });
 
+            var data = $('#createReservation').serializeArray();
+            $.ajax({
+                type: "POST",
+                url: "{{ route('create.reservation') }}",
+                data: data,
+                success: function(response) {
+                    location.reload();
+                }
+            });
         });
-
-</script>
+    </script>
 @endsection

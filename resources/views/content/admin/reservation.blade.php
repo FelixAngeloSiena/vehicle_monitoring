@@ -9,28 +9,34 @@
                 <div class="card">
                     <div class="card-body shadow-sm">
                         <table id="example" class="table-striped display" cellspacing="0" width="100%">
+
                             <thead>
                                 <tr>
-                                    <th>Vehicle Name</th>
-                                    <th>Vehicle Type</th>
                                     <th>Driver Name</th>
-                                    <th>Date Needed</th>
-                                    <th>Reservation Date</th>
-                                    <th>Action</th>
+                                    <th>Vehicle Name</th>
+                                    <th>Vehicle Plate#</th>
+                                    <th>Date Reserve</th>
+                                    <th>Created_at</th>
+                                    @if (Auth::user()->role == 'manager')
+                                        <th>Action</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Charde Marshall</td>
-                                    <td>Lemmuel Lapuz</td>
-                                    <td>Ford Ranger</td>
-                                    <td>BAB6189</td>
-                                    <td>04-15-2022</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> View Details</button>
-                                        <button type="button" class="btn btn-danger"><i class="fas fa-ban"></i> Cancel </button>
-                                    </td>
-                                </tr>
+                                @foreach ($reservationRecords as $reservationRecord)
+                                    <tr>
+                                        <td>{{ $reservationRecord->name }}</td>
+                                        <td>{{ $reservationRecord->vehicle_type }}</td>
+                                        <td>{{ $reservationRecord->plate_no }}</td>
+                                        <td>{{ $reservationRecord->reservation_date }}</td>
+                                        <td>{{ date('Y-m-d', strtotime($reservationRecord->created_at)) }}</td>
+                                        @if (Auth::user()->role == 'manager')
+                                            <td>
+                                                <button type="button" class="btn btn-danger"><i class="fas fa-ban"></i> Cancel </button>
+                                            </td>
+                                        @endif
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -38,43 +44,4 @@
             </div>
         </div>
     </div>
-    
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="d-flex justify-content-between p-3" style="background-color: #3B7DDD;">
-                    <h5 class="modal-title" id="modal-reservation-title"
-                        style="color:#fff;font-size:20px;font-weight:bold">Create Reservation</h5>
-                    <i class="fas fa-times fa-2x" data-bs-dismiss="modal" style="cursor: pointer;color:#fff"></i>
-                </div>
-                <div class="modal-body">
-                  <form >
-                    @csrf
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>Vehicle Plate#</small> </label>
-                        <input type="text" class="form-control" name="vehicle_plate"  id="plate_number" value="">
-                    </div>
-  
-                      <div class="mb-3">
-                          <label for="exampleFormControlInput1" class="form-label mb-0"><small>Driver Name</small> </label>
-                          <input type="text" class="form-control" name="vehicle_driver" id="name">
-                      </div>
-                      <div class="mb-3">
-                          <label for="exampleFormControlInput1" class="form-label mb-0"><small>Driver Contact</small> </label>
-                          <input type="text" class="form-control" name="driver_contact" id="contact">
-                      </div>
-                      <div class="mb-3">
-                          <label for="exampleFormControlInput1" class="form-label mb-0"><small>Date Needed</small> </label>
-                          <input type="date" class="form-control" name="address" id="address">
-                      </div>
-  
-                      <div class="d-grid gap-2">
-                          <button type="submit" class="btn btn-primary mb-3"> Create Reservation </button>
-                      </div>
-                  </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
 @endsection

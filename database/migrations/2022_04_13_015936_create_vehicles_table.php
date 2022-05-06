@@ -17,12 +17,12 @@ return new class extends Migration
             $table->id();
             $table->integer('department_id');
             $table->integer('driver_id')->nullable();
-            $table->string('vehicle_type');
-            $table->string('vehicle_year_model');
-            $table->string('plate_no');
-            $table->string('mv_file_no');
-            $table->string('motor_no');
-            $table->string('chasis_no');
+            $table->string('vehicle_type')->nullable();
+            $table->string('vehicle_year_model')->nullable();
+            $table->string('plate_no')->nullable();
+            $table->string('mv_file_no')->nullable();
+            $table->string('motor_no')->nullable();
+            $table->string('chasis_no')->nullable();
             $table->string('image_path')->nullable();
             $table->timestamps();
         });

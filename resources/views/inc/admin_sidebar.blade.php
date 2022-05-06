@@ -54,7 +54,16 @@
         </a>
       </li>
 
-    @elseif (Auth::user()->role == 'logistic')
+
+      @elseif (Auth::user()->role == 'audit')
+      <li class="sidebar-item">
+        <a class="sidebar-link" href="{{route('requestor.dashboard')}}">
+          <img src="https://img.icons8.com/fluency-systems-regular/25/ffffff/dashboard-layout.png"/>
+            <span class="align-middle">Your Dashboard</span>
+        </a>
+      </li>
+
+    @elseif (Auth::user()->role == 'logistic' || Auth::user()->role == 'admin')
           <li class="sidebar-item {{ request()->routeIs('admin_dashboard') ? 'active' : '' }}">
               <a class="sidebar-link" href="{{route('admin_dashboard')}}">
                 <ion-icon name="podium-outline" class="align-middle" style="font-size: 20px;"></ion-icon>
@@ -83,13 +92,14 @@
                 <span class="align-middle" style="font-size:18px;"> Drivers</span>
             </a>
         </li>
-
+        @if (Auth::user()->role == 'admin')
         <li class="sidebar-item {{ request()->routeIs('user.account') ? 'active' : '' }}">
           <a class="sidebar-link" href="{{route('user.account')}}">
             <ion-icon name="person-add-outline" class="align-middle"  style="font-size: 20px;"></ion-icon>
               <span class="align-middle" style="font-size:18px;">User Account</span>
           </a>
       </li>
+        @endif
       @endif
       
 

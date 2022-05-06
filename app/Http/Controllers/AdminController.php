@@ -2,13 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Vehicle;
 
 class AdminController extends Controller
 {
+
     public function admin_dashboard(){
-        return view('content.admin.admin_dashboard');
+
+        $vehiclesCount = Vehicle::count();
+        $reservationsCount = Reservation::where('reservation_date', now()->format('Y-m-d'))->count();
+        
+        $allReservationTodays = Reservation::where('reservation_date', now()->format('Y-m-d'))
+        ->join('vehicles', 'reservations.vehicle_id', 'vehicles.id')
+        ->join('drivers','vehicles.driver_id','drivers.id')
+        ->join('users', 'drivers.user_id', 'users.id')
+        ->get();
+        return view('content.admin.admin_dashboard',compact('allReservationTodays', 'vehiclesCount', 'reservationsCount'));
     }
 
     public function user_accounts(){

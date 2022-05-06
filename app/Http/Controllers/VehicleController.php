@@ -10,6 +10,7 @@ use App\Models\Department;
 use App\Models\TemporaryFile;
 use App\Models\Tire;
 use App\Models\Battery;
+use App\Models\Insurance;
 use App\Models\OdoMeter;
 use App\Models\Pms;
 use App\Models\VehicleRegistration;
@@ -81,9 +82,9 @@ class VehicleController extends Controller
       }
     }
 
+
   //CREATE NEW VEHICLE 
     public function create_vehicle(Request $request){
-
       $vehicleBatteryPurchase =  $request->vehicleTirePurchase;
       $vehicleTirePurchase =  $request->vehicleBatteryPurchase;
 
@@ -143,24 +144,36 @@ class VehicleController extends Controller
           'date_registration' => $request->vehicleRegDate,
           'date_expired' => $regExpirationDate
       ]);
+      Insurance::create([
+        'vehicle_id' => $vehicle->id,
+        'date_insurance_applied' => $request->insuranceApplied,
+        'date_insurance_expired' => $request->insuranceExpired
+    ]);
     }
+
+   public function vehicle_update_details(Request $request){
+    Vehicle::find($request->vehicleId)
+    ->update([
+      'vehicle_type' => $request->vehicleType,
+      'vehicle_year_model' => $request->updateYearModel,
+      'plate_no' => $request->updatePlateNumber,
+      'mv_file_no' => $request->updateMVFile,
+      'motor_no' => $request->updateMotor,
+      'chasis_no' => $request->updateChasis,
+
+    ]);
+   }
+
+    
       
   //ASSIGNED DRIVER TO VEHICLE
     public function update_vehicle_driver(Request $request){
-  
       Vehicle::find($request->vehicle_id)
       ->update([
         'driver_id' => $request->driver_id
       ]);
     }
 
-  //CHANGE DRIVER OF VEHICLE  
-    public function change_vehicle_driver(Request $request){
-      Vehicle::find($request->vehicle_id)
-      ->update([
-        'driver_id' => $request->driver_id
-      ]);
-    }
 
   //RETURN VEHICLE DETAILS  
     public function vehicle_details($id){
@@ -198,8 +211,8 @@ class VehicleController extends Controller
 
   //RETURN VEHICLE DETAILS WHEN ASSIGN DRIVER TO MODAL
     public function show_assign_driver($id){
-      $vehicleDetails = Vehicle::select('vehicle_type', 'plate_no')
-      ->where('id', $id)
+      $vehicleDetails = Vehicle::select('vehicle_type', 'plate_no', 'id')
+      ->find($id)
       ->get();
       return  $vehicleDetails; 
     }

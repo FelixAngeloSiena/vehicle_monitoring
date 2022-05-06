@@ -53,13 +53,14 @@ class DriverController extends Controller
 
 
     public function create_driver(Request $request){
-
+    
+       try{
         $temp_profile_image = TemporaryFile::where('folder', $request->driver_profile)->first();
         $uuid = Uuid::uuid4();
         $filename = $temp_profile_image->filename;
         $new_profile_image = $uuid.'-'.$filename;
 
-        Storage::move('uploads/tmp/'.$request->driver_profile.'/'.$filename, 'images/image_file/'.$new_profile_image);
+        Storage::move('uploads/tmp/'.$request->driver_profile.'/'.$filename, '/images/image_file/'.$new_profile_image);
         Storage::deleteDirectory('uploads/tmp/'.$request->driver_profile);
         $temp_profile_image->delete();
 
@@ -69,7 +70,7 @@ class DriverController extends Controller
         $filename = $temp_license->filename;
         $new_license_image = $uuid.'-'.$filename;
 
-        Storage::move('uploads/tmp/'.$request->driver_license.'/'.$filename, 'images/image_file/'.$new_license_image);
+        Storage::move('uploads/tmp/'.$request->driver_license.'/'.$filename, '/images/image_file/'.$new_license_image);
         Storage::deleteDirectory('uploads/tmp/'.$request->driver_license);
         $temp_license->delete();
 
@@ -80,7 +81,7 @@ class DriverController extends Controller
             'role'=>'driver',
         ]);
 
-         Driver::create([
+        Driver::create([
             'user_id' => $driver_Id->id,
             'id_no' => $request->driver_id,
             'profile_image_path' => $new_profile_image,
@@ -90,6 +91,11 @@ class DriverController extends Controller
             'license_exp_date' => $request->license_exp_date,
             'restriction' => $request->license_restriction,
         ]);
+
+       }catch(\Throwable $error){
+           return $error->getMessage();
+       }
+     
         
     }
 

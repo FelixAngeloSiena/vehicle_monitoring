@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuditController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\DriverController;
@@ -54,6 +55,9 @@ Route::middleware('auth')->group(function(){
         Route::get('/requestor-request-logs', 'requestor_request_logs')->name('requestor.request.logs');
         Route::post('/get-available-vehicle', 'get_available_vehicle')->name('available.vehicle');
         Route::post('/get-vehicle-driver', 'get_vehicle_driver')->name('vehicle.driver.info');
+
+        Route::post('/requestor/create/reservation', 'create_reservation')->name('create.reservation');
+        
     });
 });
 
@@ -82,8 +86,8 @@ Route::middleware('auth')->group(function(){
 
 
         Route::get('/details/{id}', 'vehicle_details')->name('vehicle.details');
-
         Route::get('/assign-driver/{id}', 'show_assign_driver')->name('vehicle.driver.assigned');
+        Route::post('/vehicle/update/details', 'vehicle_update_details')->name('vehicle.update.details');
 
       
         Route::get('/retrieve-imagefile/{imageFile}', 'getImageFile')->name('image.vehicle.details');
@@ -116,5 +120,18 @@ Route::controller(AdminController::class)->group(function () {
     Route::post('/create-users', 'create_users')->name('create.user');
 
 });
+
+
+// ----------------------------------------------------------------------------
+// Audit ROUTE GROUP
+// ----------------------------------------------------------------------------
+
+Route::controller(AuditController::class)->prefix('audit')->group(function () {
+    Route::get('/dashboard', 'audit_dashboard')->name('audit.dashboard');
+    Route::get('/vehicles', 'get_all_vehicles')->name('audit.vehicles');
+  
+});
+
+
 
 

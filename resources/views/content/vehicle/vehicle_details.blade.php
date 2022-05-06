@@ -7,115 +7,137 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-5">
-                                    <div class="card" style="background-color: #EDEDED;border-radius:0px">
+                                <div class="col-md-6">
+                                    <div class="d-flex justify-content-center mt-5">
+                                        <img src="/vehicle/retrieve-imagefile/{{ $vehicle->image_path }}" alt="a balloon" style="  max-width: 100%; height: 40vh; object-fit: cover;">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card" style="border:solid 1px #251D3A">
                                         <div class="card-body">
-                                            <div class="d-flex justify-content-center">
-                                                <img src="/vehicle/retrieve-imagefile/{{ $vehicle->image_path }}"
-                                                    alt="a balloon" style="  max-width: 100%;
-                                                height: 40vh;
-                                                object-fit: cover;">
+                                            <form id="updateVehicleForm">
+                                                @csrf
+                                            <input type="hidden" name="vehicleId" value="{{$vehicle->id}}">
+                                            <div class="d-flex justify-content-between">
+                                                <h4 class="mb-0" style="font-size: 26px" id="vehicleName">{{ $vehicle->vehicle_type }}</h4>
+                                                <p class="mb-0" style="font-size: 16px"> <small>Registration Date:</small><span> {{ $vehicle->date_registration }}</span></p>
                                             </div>
+                                                <p class="mb-0" style="font-size: 16px"><small>Driver:</small><span>{{ $vehicle->name == null ? 'No Drivers Assigned' : $vehicle->name }}</span></p>
+                                                <p style="font-size: 16px"><small>Current Odo Meter:</small> <span> {{ $vehicle->current_odo }}/km</span></p>
+                                                <hr>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="mb-0">
+                                                            <label for="exampleFormControlInput1" class="form-label">Vehicle Type:</label>
+                                                            <input type="text" value="{{$vehicle->vehicle_type}}" class="form-control" id="vehicleType" name="vehicleType">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="mb-0">
+                                                            <label for="exampleFormControlInput1" class="form-label">Year Model:</label>
+                                                            <input type="text" value="{{ $vehicle->vehicle_year_model }}" class="form-control" name="updateYearModel" id="updateYearModel">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="mb-0">
+                                                            <label for="exampleFormControlInput1" class="form-label">Plate#:</label>
+                                                            <input type="text" value="{{ $vehicle->plate_no }}" class="form-control" name="updatePlateNumber" id="updatePlateNumber">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                             
+                                                <div class="mb-0">
+                                                    <label for="exampleFormControlInput1" class="form-label">MV File#:</label>
+                                                    <input type="text" value="{{ $vehicle->mv_file_no }}" class="form-control" name="updateMVFile" id="updateMVFile">
+                                                </div>
+                                                <div class="mb-0">
+                                                    <label for="exampleFormControlInput1" class="form-label">Motor#:</label>
+                                                    <input type="text" value="{{ $vehicle->motor_no }}" class="form-control" name="updateMotor" id="updateMotor">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleFormControlInput1" class="form-label">Chasis#:</label>
+                                                    <input type="text" value="{{ $vehicle->chasis_no }}" class="form-control" id="updateChasis" name="updateChasis">
+                                                </div>
+                                                <div class="d-grid gap-2">
+                                                    <button type="submit" id="submitUpdateVehicle" style="font-size: 17px;background-color:#251D3A;color:#fff;border-radius:0px;font-weight:bold;" class="btn mb-3"> Update Vehicle</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 mt-5">
-                                    <h4 class="mb-0" style="font-size: 26px" id="vehicleName">
-                                        {{ $vehicle->vehicle_type }}</h4>
-                                    <p style="font-size: 16px">
-                                        Driver:<span>{{ $vehicle->name == null ? 'No Drivers Assigned' : $vehicle->name }}</span>
-                                    </p>
-                                    <hr>
-                                    <p class="mb-0" style="font-size: 16px"> Plate#:<span>
-                                            {{ $vehicle->plate_no }}</span></p>
-                                    <p class="mb-0" style="font-size: 16px"> Year Model#:<span>
-                                            {{ $vehicle->vehicle_year_model }}</span></p>
-                                    <p class="mb-0" style="font-size: 16px"> MV File#:<span>
-                                            {{ $vehicle->mv_file_no }}</span></p>
-                                    <p class="mb-0" style="font-size: 16px"> Motor#:<span>
-                                            {{ $vehicle->motor_no }}</span></p>
-                                    <p class="mb-0" style="font-size: 16px"> Chasis#:<span>
-                                            {{ $vehicle->chasis_no }}</span></p>
-                                    <p class="mb-0" style="font-size: 16px"> Registration Date:<span>
-                                            {{ $vehicle->date_registration }}</span></p>
-                                    <p style="font-size: 16px"> Current Odo Meter:<span> {{ $vehicle->current_odo }}</span>
-                                    </p>
-                                    <button type="button" class="btn btn-primary"
-                                        style="color:#fff;font-size:17px;font-weight:bold"> <img
-                                            src="https://img.icons8.com/external-anggara-glyph-anggara-putra/25/ffffff/external-edit-basic-ui-anggara-glyph-anggara-putra.png" />
-                                        Update Details</button>
-                                </div>
                             </div>
+
+              
                             <div class="row">
                                 <div class="col-md-2">
                                     <div class="card" id="odoLogs" onclick="odoLogs({{$id}})"
-                                        style="background-color: #EDEDED;border-radius:0px">
+                                        style="border:solid 1px#FF0066;border-radius:0px;box-shadow: -2px 2px 109px -35px rgba(0,0,0,0.6);">
                                         <div class="card-body px-2 py-3">
                                             <div id="icon-container">
-                                                <img src="{{ asset('img/odo_icon.png') }}" style="max-width: 63%"
+                                                <img src="{{ asset('img/odo_icon.webp') }}" style="max-width: 63%"
                                                     class="img-responsive">
                                             </div>
-                                            <h4 class="mb-0 text-center" id="icon-title">Odo Kilometers</h4>
+                                            <h4 class="mb-0 text-center" id="icon-title" style="background-color: #FF0066;color:#fff;padding:10px 20px">Odo Kilometers</h4>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="card" id="registrationLogs" onclick="registrationLogs({{$id}})"
-                                        style="background-color: #EDEDED;border-radius:0px">
+                                    style="border:solid 1px#FF0066;border-radius:0px;box-shadow: -2px 2px 109px -35px rgba(0,0,0,0.6);">
                                         <div class="card-body px-2 py-3">
                                             <div id="icon-container">
-                                                <img src="{{ asset('img/registration_icon.png') }}"
+                                                <img src="{{ asset('img/registration_icon.webp') }}"
                                                     style="max-width: 75%" class="img-responsive">
                                             </div>
-                                            <h4 class="mb-0 text-center" id="icon-title">Registration</h4>
+                                            <h4 class="mb-0 text-center" id="icon-title"  style="background-color: #FF0066;color:#fff;padding:10px 20px">Registration</h4>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="card" id="tireLogs" onclick="tireLogs({{$id}})"
-                                        style="background-color: #EDEDED;border-radius:0px">
+                                    style="border:solid 1px#FF0066;border-radius:0px;box-shadow: -2px 2px 109px -35px rgba(0,0,0,0.6);">
                                         <div class="card-body">
                                             <div id="icon-container">
-                                                <img src="{{ asset('img/tire_icon.png') }}" style="max-width: 60%"
+                                                <img src="{{ asset('img/tire_icon.webp') }}" style="max-width: 60%"
                                                     class="img-responsive">
                                             </div>
-                                            <h4 class="mb-0 text-center" id="icon-title">Tires</h4>
+                                            <h4 class="mb-0 text-center" id="icon-title" style="background-color: #FF0066;color:#fff;padding:10px 20px">Tires</h4>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="card" id="batteryLogs" onclick="batteryLogs({{$id}})"
-                                        style="background-color: #EDEDED;border-radius:0px">
+                                    style="border:solid 1px#FF0066;border-radius:0px;box-shadow: -2px 2px 109px -35px rgba(0,0,0,0.6);">
                                         <div class="card-body">
                                             <div id="icon-container">
-                                                <img src="{{ asset('img/battery_icon.png') }}" style="max-width: 72%"
+                                                <img src="{{ asset('img/battery_icon.webp') }}" style="max-width: 72%"
                                                     class="img-responsive">
                                             </div>
-                                            <h4 class="mb-0 text-center" id="icon-title">Battery</h4>
+                                            <h4 class="mb-0 text-center" id="icon-title" style="background-color: #FF0066;color:#fff;padding:10px 20px">Battery</h4>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="card" id="insuranceLogs"  onclick="insuranceLogs({{$id}})"
-                                        style="background-color: #EDEDED;border-radius:0px">
+                                    style="border:solid 1px#FF0066;border-radius:0px;box-shadow: -2px 2px 109px -35px rgba(0,0,0,0.6);">
                                         <div class="card-body">
                                             <div id="icon-container">
-                                                <img src="{{ asset('img/insurance_icon.png') }}" class="py-2" style="max-width: 100%"
+                                                <img src="{{ asset('img/insurance_icon.webp') }}" class="py-2" style="max-width: 100%"
                                                     class="img-responsive">
                                             </div>
-                                            <h4 class="mb-0 text-center" id="icon-title">Insurance</h4>
+                                            <h4 class="mb-0 text-center" id="icon-title" style="background-color: #FF0066;color:#fff;padding:10px 20px">Insurance</h4>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="card" id="pmsLogs"  onclick="pmsLogs({{$id}})"
-                                        style="background-color: #EDEDED;border-radius:0px">
+                                    style="border:solid 1px#FF0066;border-radius:0px;box-shadow: -2px 2px 109px -35px rgba(0,0,0,0.6);">
                                         <div class="card-body">
                                             <div id="icon-container">
-                                                <img src="{{ asset('img/pms_icon.png') }}" style="max-width: 90%"
+                                                <img src="{{ asset('img/pms_icon.webp') }}" style="max-width: 92%"
                                                     class="img-responsive">
                                             </div>
-                                            <h4 class="mb-0 text-center" id="icon-title">PMS</h4>
+                                            <h4 class="mb-0 text-center" id="icon-title" style="background-color: #FF0066;color:#fff;padding:10px 20px">PMS</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -458,6 +480,36 @@ INSURANCE MODAL
                     console.log(error);
                 })
         }
+
+
+     //submit form of adding new driver
+     $('#updateVehicleForm').on('submit', (e) => {
+            e.preventDefault();
+
+            var swal = Swal.fire({
+                title: 'Please Wait',
+                text: 'Update Vehicle Details ...',
+                icon: 'info',
+                allowOutsideClick: false,
+                showCancelButton: false,
+                showConfirmButton: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            var data = $('#updateVehicleForm').serializeArray();
+            $.ajax({
+                type: "POST",
+                url: "{{route('vehicle.update.details')}}",
+                data: data,
+                success: function(response) {
+                    location.reload();
+            
+                }
+            });
+        });
+
 
     </script>
 @endsection

@@ -58,7 +58,7 @@
                                                         class="fas fa-user-edit"></i> Assign Driver</button>
                                             @else
                                                 <button type="button" class="btn btn-danger"
-                                                    onclick="onClickChangeDriver({{ $vehicle->id }})"><i
+                                                    onclick="onClickAssignedDriver({{ $vehicle->id }})"><i
                                                         class="fas fa-random"></i> Change Driver</button>
                                             @endif
                                         </td>
@@ -241,6 +241,23 @@
                                     </div>
                                 </div>
 
+                                <div class="row mb-0">
+                                    <div class="col-md-6">
+                                        <div class="mb-0">
+                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>Date Insurance Applied:</small> </label>
+                                            <input type="date" class="form-control" value="" name="insuranceApplied"
+                                                id="insuranceApplied">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-0">
+                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>Date Insurance Expired:</small> </label>
+                                            <input type="date" class="form-control" value=""
+                                                name="insuranceExpired" id="insuranceExpired">
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="row mb-4">
                                     <div class="col-md-4">
                                         <div class="mb-0">
@@ -288,7 +305,7 @@
 
 {{-- ----------------------------------------
 ASSIGN DRIVER VEHICLE MODAL
- -------------------------------------- --}}
+-------------------------------------- --}}
     <div class="modal fade" id="assignedDriver" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content" style="background-color:#F4F3EF">
@@ -299,13 +316,13 @@ ASSIGN DRIVER VEHICLE MODAL
                 </div>
 
                 <div class="modal-body">
+                    <input type="hidden"  value="" id="vehicleId" >
                     <div class="mb-3">
-                   
                         <p class="mb-0" id="vehicleTypeTemp" style="font-size:20px;"></p>
                         <p> Plate#: <span id="vehiclePlateNo"></span></p>
                         <label for="exampleFormControlInput1" class="form-label mb-0"><small> Available Drivers:</small>
                         </label>
-                        <select class="form-select" id="selectedDriver" name="vehicle_driver"
+                        <select class="form-select" id="selectedAssignedDriverId" name="vehicle_driver"
                             aria-label="Default select example">
                             <option selected disabled>Select Driver</option>
                             @foreach ($drivers as $driver)
@@ -314,7 +331,7 @@ ASSIGN DRIVER VEHICLE MODAL
                         </select>
                     </div>
                     <div class="d-grid gap-2">
-                        <button type="button" id="submitDriverAssigned" class="btn btn-primary mb-3"> Assigned Driver
+                        <button type="button" id="submitDriverAssigned"   class="btn btn-primary mb-3"> Assigned Driver
                         </button>
                     </div>
                 </div>
@@ -362,7 +379,6 @@ CHANGE DRIVER VEHICLE MODAL
 
 
 
-    
 @endsection
 @section('script')
     <script>
@@ -445,8 +461,7 @@ CHANGE DRIVER VEHICLE MODAL
                 data: data,
                 success: function(response) {
                     console.log(response);
-                    // location.reload();
-                    $('#createVehicleModal').modal('hide');
+                    location.reload();
                     if (response.status == 'ERROR') {
                         Swal.fire({
                             title: 'Error',
@@ -477,7 +492,7 @@ CHANGE DRIVER VEHICLE MODAL
             axios.get('/vehicle/assign-driver/'+id)
                 .then(function(response) {
                     response.data.forEach(value => {
-                        console.log(value);
+                        $('#vehicleId').val(value.id);
                         $('#vehicleTypeTemp').text(value.vehicle_type);
                         $('#vehiclePlateNo').text(value.plate_no);
                     });
@@ -488,21 +503,6 @@ CHANGE DRIVER VEHICLE MODAL
             $('#assignedDriver').modal('show');
         }
 
-          //GET ID OF VEHICLE TO ASSIGNED VEHICLE DRIVE
-        const onClickChangeDriver = (id) => {
-            axios.get('/vehicle/assign-driver/'+id)
-                .then(function(response) {
-                    response.data.forEach(value => {
-                        console.log(value);
-                        $('#vehicleTypeTemp').text(value.vehicle_type);
-                        $('#vehiclePlateNo').text(value.plate_no);
-                    });
-                })
-                .catch(function(error) {
-                    console.log(error);
-                })
-            $('#changeDriver').modal('show');
-        }
 
         //SUBMIT FUNCTION TO CHANGE DRIVER
         $('#submitChangeDriver').on('click', () => {
@@ -559,8 +559,9 @@ CHANGE DRIVER VEHICLE MODAL
 
         //SUBMIT FUNCTION TO ASSIGNED DRIVER
         $('#submitDriverAssigned').on('click', () => {
-            var selectedDriverId = $('#selectedDriver').val();
+            var selectedAssignedDriverId = $('#selectedAssignedDriverId').val();
             var vehicleId = $('#vehicleId').val();
+            console.log(vehicleId);
             var swal = Swal.fire({
                 title: 'Please Wait',
                 text: 'Assigned Driver to Vehicle ...',
@@ -578,33 +579,11 @@ CHANGE DRIVER VEHICLE MODAL
                 url: "{{ route('update.vehicle.driver') }}",
                 data: {
                     '_token': "{{ csrf_token() }}",
-                    'driver_id': selectedDriverId,
+                    'driver_id': selectedAssignedDriverId,
                     'vehicle_id': vehicleId
                 },
                 success: function(response) {
                     location.reload();
-                    $('#assignedDriver').modal('hide');
-                    if (response.status == 'ERROR') {
-                        Swal.fire({
-                            title: 'Error',
-                            text: response.message,
-                            icon: 'error'
-                        });
-                    } else if (response.status == "WARNING") {
-                        Swal.fire({
-                            title: 'Warning',
-                            text: response.message,
-                            icon: 'warning'
-                        });
-                    } else if (response.status == "OK") {
-                        Swal.fire({
-                            title: 'Success',
-                            text: response.message,
-                            icon: 'success'
-                        }).then((result) => {
-                            view_request();
-                        })
-                    }
 
                 }
             });
