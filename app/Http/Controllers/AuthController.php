@@ -33,9 +33,11 @@ class AuthController extends Controller
                 if($checkRoles == 'requestor'){
                     return redirect()->route('requestor.dashboard');
                 }
-
                 if($checkRoles == 'audit'){
                     return redirect()->route('audit.dashboard');
+                }
+                if($checkRoles == 'purchasing'){
+                    return redirect()->route('purchasing.dashboard');
                 }
                 
             }

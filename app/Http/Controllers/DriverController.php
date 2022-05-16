@@ -41,17 +41,17 @@ class DriverController extends Controller
 
 
     public function vehicle_driver(){
-        $vehicles = Vehicle::select('id', 'vehicle_type')->get();
-        $companies = Company::select('id', 'company_name')->get();
-        $drivers = DB::table('drivers')
-        ->leftJoin('vehicles', 'vehicles.driver_id', '=', 'drivers.id')
-        ->leftJoin('users','drivers.user_id', '=' , 'users.id')
-        ->selectRaw("CASE WHEN vehicles.driver_id IS NULL THEN 'available' ELSE 'assigned' END AS status, vehicles.*, drivers.*, users.name")
-        ->get();
+            $vehicles = Vehicle::select('id', 'vehicle_type')->get();
+            $companies = Company::select('id', 'company_name')->get();
+            $drivers = DB::table('drivers')
+            ->leftJoin('vehicles', 'vehicles.driver_id', '=', 'drivers.id')
+            ->leftJoin('users','drivers.user_id', '=' , 'users.id')
+            ->selectRaw("CASE WHEN vehicles.driver_id IS NULL THEN 'available' ELSE 'assigned' END AS status, vehicles.*, drivers.*, users.name")
+            ->get();
         return view('content.admin.driver', compact('vehicles', 'drivers', 'companies'));
     }
 
-
+    
     public function create_driver(Request $request){
     
        try{
@@ -101,64 +101,64 @@ class DriverController extends Controller
 
     
     public function upload_profile(Request $request) {
-        if($request->hasFile('driver_profile')) {
-            $file = $request->driver_profile;
-            $extension = $file->extension();
-            $filename = \uniqid() . '-' . now()->timestamp.'.'.$extension;
-            $folder = \uniqid() . '-' . now()->timestamp;
-            $file->storeAs('uploads/tmp/'. $folder, $filename);
-  
-            TemporaryFile::create([
-                'folder'=>$folder,
-                'filename'=>$filename
-            ]);
-          return $folder;
-          }
-          return '';
-      }
+    if($request->hasFile('driver_profile')) {
+        $file = $request->driver_profile;
+        $extension = $file->extension();
+        $filename = \uniqid() . '-' . now()->timestamp.'.'.$extension;
+        $folder = \uniqid() . '-' . now()->timestamp;
+        $file->storeAs('uploads/tmp/'. $folder, $filename);
+
+        TemporaryFile::create([
+            'folder'=>$folder,
+            'filename'=>$filename
+        ]);
+        return $folder;
+        }
+        return '';
+    }
 
       
-      public function revert_profile(Request $request) {
+    public function revert_profile(Request $request) {
         try {
             $fileId = request()->getContent();
             Storage::deleteDirectory('uploads/tmp/'.$fileId);
             TemporaryFile::where('folder', $fileId)->delete();
             return '';
-         } catch (\Throwable $th) {
+            } catch (\Throwable $th) {
             return $th->getMessage();
         }
-      }
+    }
 
 
-      public function upload_license(Request $request) {
-        if($request->hasFile('driver_license')) {
-            $file = $request->driver_license;
-            $extension = $file->extension();
-            $filename = \uniqid() . '-' . now()->timestamp.'.'.$extension;
-            $folder = \uniqid() . '-' . now()->timestamp;
-            $file->storeAs('uploads/tmp/'. $folder, $filename);
-  
-            TemporaryFile::create([
-                'folder'=>$folder,
-                'filename'=>$filename
-            ]);
-          return $folder;
-          }
-          return '';
-      }
+    public function upload_license(Request $request) {
+    if($request->hasFile('driver_license')) {
+        $file = $request->driver_license;
+        $extension = $file->extension();
+        $filename = \uniqid() . '-' . now()->timestamp.'.'.$extension;
+        $folder = \uniqid() . '-' . now()->timestamp;
+        $file->storeAs('uploads/tmp/'. $folder, $filename);
+
+        TemporaryFile::create([
+            'folder'=>$folder,
+            'filename'=>$filename
+        ]);
+        return $folder;
+        }
+        return '';
+    }
 
       
-      public function revert_license(Request $request) {
+    public function revert_license(Request $request) {
         try {
             $fileId = $request()->getContent();
             return $fileId;
             Storage::deleteDirectory('uploads/tmp/'.$fileId);
             TemporaryFile::where('folder', $fileId)->delete();
             return '';
-         } catch (\Throwable $th) {
+            } catch (\Throwable $th) {
             return 'error';
         }
-      }
+    }
 
 
 }

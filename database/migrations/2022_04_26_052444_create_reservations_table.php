@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedInteger('vehicle_id');
             $table->unsignedInteger('user_id');
             $table->string('reservation_date');
+            $table->string('reservation_status');
             $table->timestamps();
         });
     }

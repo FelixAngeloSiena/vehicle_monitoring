@@ -20,16 +20,12 @@ return new class extends Migration
             $table->string('front_right_tire');
             $table->string('rear_left_tire');
             $table->string('rear_right_tire');
-            $table->string('date_replace');
+            $table->string('date_changed');
+            $table->string('date_next_change');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('tires');

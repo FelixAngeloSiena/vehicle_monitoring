@@ -32,11 +32,10 @@ class RequestorController extends Controller
         leftJoin('reservations', 'vehicles.id','=', 'reservations.vehicle_id')
         ->whereRaw('(reservations.reservation_date <> "'.Carbon::parse($request->date_reserve)->format('Y-m-d').'" OR reservations.reservation_date IS NULL)')
         ->whereIn('vehicles.department_id',  $department)
+        ->whereNotNull('vehicles.driver_id')
         ->select('vehicles.vehicle_type','vehicles.plate_no','vehicles.id')
         ->get();
-    
         return $availbleVehicle; 
-
         
     }
 
@@ -57,7 +56,8 @@ class RequestorController extends Controller
         Reservation::create([
            'vehicle_id' => $request->vehicleId,
            'user_id' => Auth::user()->id,
-           'reservation_date'=> $request->date_reservation
+           'reservation_date'=> $request->date_reservation,
+           'reservation_status' => 'pending'
         ]);
     }
 }

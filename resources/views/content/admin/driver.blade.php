@@ -12,7 +12,7 @@
 
                 <div class="card">
                     <div class="card-body shadow-sm">
-                        <table id="example" class="table-striped display" cellspacing="0" width="100%">
+                        <table id="driverInitTable" class="table-striped display" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>Driver Id#</th>
@@ -49,7 +49,7 @@
     </div>
 
 
-    {{-- ----------------------------------------
+{{------------------------------------------
  Modal for Reservation Details
  -------------------------------------- --}}
 
@@ -192,7 +192,7 @@
             FilePondPluginFileValidateType,
             FilePondPluginImagePreview
         );
-            FilePond.create(document.getElementById("uploadProfileImage"), {
+        FilePond.create(document.getElementById("uploadProfileImage"), {
             acceptedFileTypes: ['image/*'],
             maxFileSize: "40mb",
             maxFiles: "1",
@@ -230,7 +230,7 @@
             },
         });
 
-            FilePond.create(document.getElementById("uploadLicenseImage"), {
+        FilePond.create(document.getElementById("uploadLicenseImage"), {
             acceptedFileTypes: ['image/*'],
             maxFileSize: "40mb",
             maxFiles: "1",
@@ -271,7 +271,6 @@
         //submit form of adding new driver
         $('#createDriverForm').on('submit', (e) => {
             e.preventDefault();
-
             var swal = Swal.fire({
                 title: 'Please Wait',
                 text: 'Saving New Driver in database ...',
@@ -283,7 +282,6 @@
                     Swal.showLoading();
                 }
             });
-
             var data = $('#createDriverForm').serializeArray();
             $.ajax({
                 type: "POST",
@@ -315,6 +313,15 @@
                     }
                 }
             });
+        });
+
+        $('#driverInitTable').DataTable({
+            dom: 'Bfrtip',
+                buttons: [
+                'csv', 'excel', 'pdf', 'print',
+                ],
+            destroy: true,
+            responsive: true,
         });
     </script>
 @endsection

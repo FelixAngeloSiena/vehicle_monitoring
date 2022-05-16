@@ -15,7 +15,7 @@ class CompanySeeder extends Seeder
      */
     public function run()
     {
-        $companys = ['Everfirst', 'FMLC', 'MBI', 'MSC', 'MSC Davao', 'MSC Cebu', 'MSI', 'C2C156'];
+        $companys = ['Everfirst', 'FMLC', 'MBI', 'MSC', 'MSC Davao', 'MSC Cebu', 'WorldCraft'];
 
         foreach($companys as $company) {
             Company::create([

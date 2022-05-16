@@ -7,6 +7,7 @@ use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
+use DB;
 
 class AuditController extends Controller
 {
@@ -39,5 +40,13 @@ class AuditController extends Controller
             ->rawColumns(['actions'])
             ->make(true);
     }
-    
+
+    public function update_odometer(Request $request){
+        DB::table('vehicles')
+        ->join('odo_meters', 'vehicles.id', '=', 'odo_meters.vehicle_id')
+        ->where('vehicles.id', $request->vehicleId)
+        ->update([
+        'current_odo' => $request->updateOdo,
+        ]);
+    }
 }

@@ -12,7 +12,7 @@
                         <div class="row">
                             <div class="col-md-7">
                                 @if (count($scheduleTodays) > 0)
-                                <p style="font-size: 20px;font-weight:bold">Your Reservation Today</p>
+                                <p style="font-size: 20px;font-weight:bold">You have reservation today!</p>
                                     @foreach ($scheduleTodays as $scheduleToday)
                                     <div class="alert alert-success" role="alert">
                                         <p class="mb-0" style="font-size:25px;font-weight:bold">{{date('d M Y', strtotime($scheduleToday->reservation_date)) }}</p>
@@ -106,7 +106,7 @@
                                             id="driver_license_restriction" value="">
                                     </div>
 
-                                    <div class="d-grid gap-2">
+                                    <div class="d-flex justify-content-end">
                                         <button type="submit" class="btn btn-primary mb-3"><img
                                                 src="https://img.icons8.com/external-anggara-glyph-anggara-putra/25/ffffff/external-edit-basic-ui-anggara-glyph-anggara-putra.png" />
                                             Submit Request </button>

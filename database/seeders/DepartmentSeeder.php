@@ -134,11 +134,6 @@ class DepartmentSeeder extends Seeder
                 'department_name' => 'Warehouse'
             ],
 
-            [
-                'company_id' => 8,
-                'department_name' => 'MSC'
-            ],
-      
     
         ];
 

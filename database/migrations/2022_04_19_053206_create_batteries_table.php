@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('vehicle_id');
             $table->string('brand_name');
-            $table->string('date_replace');
+            $table->string('date_changed');
+            $table->string('date_next_change');
             $table->timestamps();
         });
     }

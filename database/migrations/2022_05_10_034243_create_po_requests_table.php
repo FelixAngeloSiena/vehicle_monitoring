@@ -13,12 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pms', function (Blueprint $table) {
+        Schema::create('po_requests', function (Blueprint $table) {
             $table->id();
-            $table->integer('vehicle_id');
-            $table->string('kilometer_odo');
-            $table->string('date_of_pm');
-            $table->string('date_of_next_pms');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('request_maintenance_id');
+            $table->string('po_number');
+            $table->string('date_sent');
+            $table->string('supplier_name');
+            $table->string('remarks');
+            $table->string('tire_position')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pms');
+        Schema::dropIfExists('po_requests');
     }
 };

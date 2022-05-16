@@ -16,7 +16,7 @@
                 <div class="card">
                     <div class="card-body shadow-sm">
 
-                        <table id="example" class="table-striped display" cellspacing="0" width="100%">
+                        <table id="vehiclesTable" class="table-striped display" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>Vehicle Type</th>
@@ -45,20 +45,17 @@
                                         <td>{{ $vehicle->driver_id === null ? 'No Driver Assigned' : $vehicle->name }}
                                         </td>
                                         <td>
-                                            {{-- <button type="button" class="btn btn-primary"
-                                                onclick="onClickVehicleDetail({{ $vehicle->id }})"><i
-                                                    class="fas fa-eye"></i> View Details</button> --}}
-                                                    <a href="{{route('vehicle.details', $vehicle->id)}}" class="btn btn-primary">
-                                                        <i class="fas fa-eye"></i> 
-                                                        View Details
-                                                    </a>   
+                                            <a href="{{route('vehicle.details', $vehicle->id)}}" class="btn btn-primary">
+                                                <i class="fas fa-eye"></i> 
+                                                View Details
+                                            </a>   
                                             @if ($vehicle->driver_id === null)
                                                 <button type="button" class="btn btn-danger"
                                                     onclick="onClickAssignedDriver({{ $vehicle->id }})"><i
                                                         class="fas fa-user-edit"></i> Assign Driver</button>
                                             @else
                                                 <button type="button" class="btn btn-danger"
-                                                    onclick="onClickAssignedDriver({{ $vehicle->id }})"><i
+                                                    onclick="onClickChangeDriver({{ $vehicle->id }})"><i
                                                         class="fas fa-random"></i> Change Driver</button>
                                             @endif
                                         </td>
@@ -72,272 +69,273 @@
             </div>
         </div>
     </div>
-    {{-- ----------------------------------------
-      Modal for Create New Vehicle
+
+{{------------------------------------------
+MODAL CREATE NEW VEHICLE
  -------------------------------------- --}}
+<div class="modal fade" id="createVehicleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="background-color:#F4F3EF">
+            <div class="d-flex justify-content-between p-3" style="background-color: #3B7DDD;">
+                <h5 class="modal-title" id="modal-reservation-title"
+                    style="color:#fff;font-size:20px;font-weight:bold">Create Vehicle</h5>
+                <i class="fas fa-times fa-2x" data-bs-dismiss="modal" style="cursor: pointer;color:#fff"></i>
+            </div>
+            <form id="vehicle-form">
+                @csrf
+                <div class="modal-body">
 
-    <div class="modal fade" id="createVehicleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content" style="background-color:#F4F3EF">
-                <div class="d-flex justify-content-between p-3" style="background-color: #3B7DDD;">
-                    <h5 class="modal-title" id="modal-reservation-title"
-                        style="color:#fff;font-size:20px;font-weight:bold">Create Vehicle</h5>
-                    <i class="fas fa-times fa-2x" data-bs-dismiss="modal" style="cursor: pointer;color:#fff"></i>
-                </div>
-                <form id="vehicle-form">
-                    @csrf
-                    <div class="modal-body">
+                    <div class="card shadow" style="border:solid 1px #cfcfcf">
+                        <div class="card-body pb-1">
 
-                        <div class="card shadow" style="border:solid 1px #cfcfcf">
-                            <div class="card-body pb-1">
-
-                                <div class="row mb-0">
-                                    <div class="col-md-8">
-                  
-                                        <div class="card  mb-0" style="border:solid 1px #cfcfcf">
-                                            <div class="card-body py-2">
-                                                <label for="exampleFormControlInput1" class="form-label mb-0"><small>Select Vehicle Conditions:</small> </label>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="vehicleCondition" value="secondhand" id="vehicleCondition">
-                                                            <label class="form-check-label" for="flexRadioDisabled">
-                                                                <small> SecondHand Vehicle</small> 
-                                                            </label>
-                                                          </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="vehicleCondition" value="new" id="vehicleCondition">
-                                                            <label class="form-check-label" for="flexRadioDisabled">
-                                                              <small>New Vehicle</small> 
-                                                            </label>
-                                                          </div>
-                                                    </div>
+                            <div class="row mb-0">
+                                <div class="col-md-8">
+                
+                                    <div class="card  mb-0" style="border:solid 1px #cfcfcf">
+                                        <div class="card-body py-2">
+                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>Select Vehicle Conditions:</small> </label>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="vehicleCondition" value="secondhand" id="vehicleCondition">
+                                                        <label class="form-check-label" for="flexRadioDisabled">
+                                                            <small> SecondHand Vehicle</small> 
+                                                        </label>
+                                                        </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="vehicleCondition" value="new" id="vehicleCondition">
+                                                        <label class="form-check-label" for="flexRadioDisabled">
+                                                            <small>New Vehicle</small> 
+                                                        </label>
+                                                        </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="row mb-0">
-                                    <div class="col-md-4">
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>Vehicle Type:</small> </label>
-                                                    <input type="text" class="form-control" value="" name="vehicleType"
-                                                id="vehicleType">
-                                        </div>
-                                    </div>
-
-                            
-                                    <div class="col-md-4">
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>Year
-                                                    Model:</small> </label>
-                                            <input type="text" class="form-control" value="" name="vehicleModel"
-                                                id="vehicleModel">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1"
-                                                class="form-label mb-0"><small>Plate#:</small> </label>
-                                            <input type="text" class="form-control" value="" name="vehiclePlate"
-                                                id="vehiclePlate">
-                                        </div>
+                            <div class="row mb-0">
+                                <div class="col-md-4">
+                                    <div class="mb-0">
+                                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>Vehicle Type:</small> </label>
+                                                <input type="text" class="form-control" value="" name="vehicleType"
+                                            id="vehicleType">
                                     </div>
                                 </div>
 
-                                <div class="row mb-0">
-                                    <div class="col-md-4">
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>MV
-                                                    File#:</small> </label>
-                                            <input type="text" class="form-control" value="" name="vehicleMV"
-                                                id="vehicleMV">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1"
-                                                class="form-label mb-0"><small>Motor#:</small> </label>
-                                            <input type="text" class="form-control" value="" name="vehicleMotor"
-                                                id="vehicleMotor">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1"
-                                                class="form-label mb-0"><small>Chasis#:</small> </label>
-                                            <input type="text" class="form-control" value="" name="vehicleChasis"
-                                                id="vehicleChasis">
-                                        </div>
+                        
+                                <div class="col-md-4">
+                                    <div class="mb-0">
+                                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>Year
+                                                Model:</small> </label>
+                                        <input type="text" class="form-control" value="" name="vehicleModel"
+                                            id="vehicleModel">
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="mb-0">
+                                        <label for="exampleFormControlInput1"
+                                            class="form-label mb-0"><small>Plate#:</small> </label>
+                                        <input type="text" class="form-control" value="" name="vehiclePlate"
+                                            id="vehiclePlate">
+                                    </div>
+                                </div>
+                            </div>
 
-                                <div class="row mb-0">
-                                    <div class="col-md-6">
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1"
-                                                class="form-label mb-0"><small>Company:</small> </label>
-                                            <select class="form-select" id="selectedCompany" name="vehicle_company"
-                                                aria-label="Default select example">
-                                                <option selected disabled>Select Company</option>
-                                                @foreach ($companies as $company)
-                                                    <option value={{ $company->id }}>{{ $company->company_name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1"
-                                                class="form-label mb-0"><small>Department:</small> </label>
-                                            <select class="form-select" id="selectedDepartment"
-                                                name="vehicle_department" aria-label="Default select example">
-                                                <option selected disabled>Select Department</option>
-                                            </select>
-                                        </div>
+                            <div class="row mb-0">
+                                <div class="col-md-4">
+                                    <div class="mb-0">
+                                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>MV
+                                                File#:</small> </label>
+                                        <input type="text" class="form-control" value="" name="vehicleMV"
+                                            id="vehicleMV">
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="mb-0">
+                                        <label for="exampleFormControlInput1"
+                                            class="form-label mb-0"><small>Motor#:</small> </label>
+                                        <input type="text" class="form-control" value="" name="vehicleMotor"
+                                            id="vehicleMotor">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-0">
+                                        <label for="exampleFormControlInput1"
+                                            class="form-label mb-0"><small>Chasis#:</small> </label>
+                                        <input type="text" class="form-control" value="" name="vehicleChasis"
+                                            id="vehicleChasis">
+                                    </div>
+                                </div>
+                            </div>
 
-                                <div class="row mb-0">
-                                    <div class="col-md-6">
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>Tire
-                                                    Name:</small> </label>
-                                            <input type="text" class="form-control" value="" name="vehicleTire"
-                                                id="vehicleTire">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>Date of
-                                                    Purchase Tire:</small> </label>
-                                            <input type="date" class="form-control" value="" name="vehicleTirePurchase"
-                                                id="vehicleTirePurchase">
-                                        </div>
+                            <div class="row mb-0">
+                                <div class="col-md-6">
+                                    <div class="mb-0">
+                                        <label for="exampleFormControlInput1"
+                                            class="form-label mb-0"><small>Company:</small> </label>
+                                        <select class="form-select" id="selectedCompany" name="vehicle_company"
+                                            aria-label="Default select example">
+                                            <option selected disabled>Select Company</option>
+                                            @foreach ($companies as $company)
+                                                <option value={{ $company->id }}>{{ $company->company_name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="mb-0">
+                                        <label for="exampleFormControlInput1"
+                                            class="form-label mb-0"><small>Department:</small> </label>
+                                        <select class="form-select" id="selectedDepartment"
+                                            name="vehicle_department" aria-label="Default select example">
+                                            <option selected disabled>Select Department</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
 
-                                <div class="row mb-0">
-                                    <div class="col-md-6">
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>Battery
-                                                    Name:</small> </label>
-                                            <input type="text" class="form-control" value="" name="vehicleBattery"
-                                                id="vehicleBattery">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>Date of
-                                                    Purchase Battery:</small> </label>
-                                            <input type="date" class="form-control" value=""
-                                                name="vehicleBatteryPurchase" id="vehicleBatteryPurchase">
-                                        </div>
+                            <div class="row mb-0">
+                                <div class="col-md-6">
+                                    <div class="mb-0">
+                                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>Tire
+                                                Name:</small> </label>
+                                        <input type="text" class="form-control" value="" name="vehicleTire"
+                                            id="vehicleTire">
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="mb-0">
+                                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>Date of
+                                                Purchase Tire:</small> </label>
+                                        <input type="date" class="form-control" value="" name="vehicleTirePurchase"
+                                            id="vehicleTirePurchase">
+                                    </div>
+                                </div>
+                            </div>
 
-                                <div class="row mb-0">
-                                    <div class="col-md-6">
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>Date Insurance Applied:</small> </label>
-                                            <input type="date" class="form-control" value="" name="insuranceApplied"
-                                                id="insuranceApplied">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>Date Insurance Expired:</small> </label>
-                                            <input type="date" class="form-control" value=""
-                                                name="insuranceExpired" id="insuranceExpired">
-                                        </div>
+                            <div class="row mb-0">
+                                <div class="col-md-6">
+                                    <div class="mb-0">
+                                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>Battery
+                                                Name:</small> </label>
+                                        <input type="text" class="form-control" value="" name="vehicleBattery"
+                                            id="vehicleBattery">
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="mb-0">
+                                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>Date of
+                                                Purchase Battery:</small> </label>
+                                        <input type="date" class="form-control" value=""
+                                            name="vehicleBatteryPurchase" id="vehicleBatteryPurchase">
+                                    </div>
+                                </div>
+                            </div>
 
-                                <div class="row mb-4">
-                                    <div class="col-md-4">
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>Current
-                                                    Odo:</small> </label>
-                                            <input type="text" class="form-control" value="" name="vehicleOdo"
-                                                id="vehicleOdo">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1" class="form-label mb-0"><small>Date Of
-                                                    Last PMS:</small> </label>
-                                            <input type="date" class="form-control" value="" name="vehicleLastPMS"
-                                                id="vehicleLastPMS">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-0">
-                                            <label for="exampleFormControlInput1"
-                                                class="form-label mb-0"><small>Registration Date:</small> </label>
-                                            <input type="date" class="form-control" value="" name="vehicleRegDate"
-                                                id="vehicleRegDate">
-                                        </div>
+                            <div class="row mb-0">
+                                <div class="col-md-6">
+                                    <div class="mb-0">
+                                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>Date Insurance Applied:</small> </label>
+                                        <input type="date" class="form-control" value="" name="insuranceApplied"
+                                            id="insuranceApplied">
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="mb-0">
+                                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>Date Insurance Expired:</small> </label>
+                                        <input type="date" class="form-control" value=""
+                                            name="insuranceExpired" id="insuranceExpired">
+                                    </div>
+                                </div>
+                            </div>
 
-                                <div class="mb-0">
-                                    <label for="exampleFormControlInput1" class="form-label mb-0"><small>Upload Vehicle
-                                            Image:</small> </label>
-                                    <input type="file filepond" name="file" id="uploadVehicleImage">
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <div class="mb-0">
+                                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>Current
+                                                Odo:</small> </label>
+                                        <input type="text" class="form-control" value="" name="vehicleOdo"
+                                            id="vehicleOdo">
+                                    </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="mb-0">
+                                        <label for="exampleFormControlInput1" class="form-label mb-0"><small>Date Of
+                                                Last PMS:</small> </label>
+                                        <input type="date" class="form-control" value="" name="vehicleLastPMS"
+                                            id="vehicleLastPMS">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-0">
+                                        <label for="exampleFormControlInput1"
+                                            class="form-label mb-0"><small>Registration Date:</small> </label>
+                                        <input type="date" class="form-control" value="" name="vehicleRegDate"
+                                            id="vehicleRegDate">
+                                    </div>
+                                </div>
+                            </div>
 
-                                <div class="d-grid gap-2">
-                                    <button type="submit" id="submitVehicleInfo" class="btn btn-primary mb-3"> Submit
-                                    </button>
-                                </div>
+                            <div class="mb-0">
+                                <label for="exampleFormControlInput1" class="form-label mb-0"><small>Upload Vehicle
+                                        Image:</small> </label>
+                                <input type="file filepond" name="file" id="uploadVehicleImage">
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" id="submitVehicleInfo" class="btn btn-primary mb-3"> Submit
+                                </button>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
 {{-- ----------------------------------------
 ASSIGN DRIVER VEHICLE MODAL
 -------------------------------------- --}}
-    <div class="modal fade" id="assignedDriver" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content" style="background-color:#F4F3EF">
-                <div class="d-flex justify-content-between p-3" style="background-color: #3B7DDD;">
-                    <h5 class="modal-title" id="modal-reservation-title"
-                        style="color:#fff;font-size:20px;font-weight:bold">Assigned Driver</h5>
-                    <i class="fas fa-times fa-2x" data-bs-dismiss="modal" style="cursor: pointer;color:#fff"></i>
-                </div>
+<div class="modal fade" id="assignedDriver" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-color:#F4F3EF">
+            <div class="d-flex justify-content-between p-3" style="background-color: #3B7DDD;">
+                <h5 class="modal-title" id="modal-reservation-title"
+                    style="color:#fff;font-size:20px;font-weight:bold">Assigned Driver</h5>
+                <i class="fas fa-times fa-2x" data-bs-dismiss="modal" style="cursor: pointer;color:#fff"></i>
+            </div>
 
-                <div class="modal-body">
-                    <input type="hidden"  value="" id="vehicleId" >
-                    <div class="mb-3">
-                        <p class="mb-0" id="vehicleTypeTemp" style="font-size:20px;"></p>
-                        <p> Plate#: <span id="vehiclePlateNo"></span></p>
-                        <label for="exampleFormControlInput1" class="form-label mb-0"><small> Available Drivers:</small>
-                        </label>
-                        <select class="form-select" id="selectedAssignedDriverId" name="vehicle_driver"
-                            aria-label="Default select example">
-                            <option selected disabled>Select Driver</option>
-                            @foreach ($drivers as $driver)
-                                <option value={{ $driver->id }}>{{ $driver->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="d-grid gap-2">
-                        <button type="button" id="submitDriverAssigned"   class="btn btn-primary mb-3"> Assigned Driver
-                        </button>
-                    </div>
+            <div class="modal-body">
+                <input type="hidden"  value="" id="assignedDriverVehicleId" >
+                <input type="hidden"  value="" id="assignedDriverId" >
+                <div class="mb-3">
+                    <p class="mb-0" id="assignDriverVehicleType" style="font-size:20px;"></p>
+                    <p> Plate#: <span id="assingDrivervehiclePlateNo"></span></p>
+                    <label for="exampleFormControlInput1" class="form-label mb-0"><small> Available Drivers:</small>
+                    </label>
+                    <select class="form-select" id="selectedAssignedDriverId" name="vehicle_driver"
+                        aria-label="Default select example">
+                        <option selected disabled>Select Driver</option>
+                        @foreach ($drivers as $driver)
+                            <option value={{ $driver->id }}>{{ $driver->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="button" id="submitDriverAssigned"   class="btn btn-primary mb-3"> Assigned Driver
+                    </button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 
 {{-- ----------------------------------------
@@ -353,12 +351,14 @@ CHANGE DRIVER VEHICLE MODAL
                 </div>
 
                 <div class="modal-body">
+                    <input type="hidden"  value="" id="changedDriverId" >
+                    <input type="hidden"  value="" id="changedDriverVehicleId" >
                     <div class="mb-3">
-                        <p class="mb-0" id="vehicleTypeTemp" style="font-size:20px;"></p>
-                         <p> Plate#: <span id="vehiclePlateNo"></span></p>
+                        <p class="mb-0" id="changeDriverVehicleType" style="font-size:20px;"></p>
+                         <p> Plate#: <span id="changeDriverVehiclePlateNo"></span></p>
                         <label for="exampleFormControlInput1" class="form-label mb-0"><small>Available
                                 Drivers:</small> </label>
-                        <select class="form-select" id="selectedChangeDriver" name="vehicle_change_driver"
+                        <select class="form-select" id="selectedChangeDriverId" name="vehicle_change_driver"
                             aria-label="Default select example">
                             <option selected disabled>
                                 {{ count($drivers) > 0 ? 'Select Driver' : 'No Drivers available' }}</option>
@@ -382,6 +382,17 @@ CHANGE DRIVER VEHICLE MODAL
 @endsection
 @section('script')
     <script>
+
+                $('#vehiclesTable').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'csv', 'excel', 'pdf', 'print',
+                    ],
+                    destroy: true,
+                    responsive: true,
+                });
+
+
         //ONCHANGE FUNCTION OF COMPANY TO SHOW HIS DEPARTMENT
         $('#selectedCompany').on('change', () => {
             var vehicleCompanyId = $('#selectedCompany').val();
@@ -395,7 +406,6 @@ CHANGE DRIVER VEHICLE MODAL
                     });
                 })
                 .catch(function(error) {
-                    console.log(error);
                 })
         })
 
@@ -487,14 +497,14 @@ CHANGE DRIVER VEHICLE MODAL
             });
         });
 
-        //GET ID OF VEHICLE TO ASSIGNED VEHICLE DRIVE
+        //SET VEHICLES DETAILS IN MODAL WHEN ASSIGNED DRIVER
         const onClickAssignedDriver = (id) => {
-            axios.get('/vehicle/assign-driver/'+id)
+            axios.get('/vehicle/assign/driver/'+id)
                 .then(function(response) {
                     response.data.forEach(value => {
-                        $('#vehicleId').val(value.id);
-                        $('#vehicleTypeTemp').text(value.vehicle_type);
-                        $('#vehiclePlateNo').text(value.plate_no);
+                        $('#assignedDriverVehicleId').val(value.id);
+                        $('#assignDriverVehicleType').text(value.vehicle_type);
+                        $('#assingDrivervehiclePlateNo').text(value.plate_no);
                     });
                 })
                 .catch(function(error) {
@@ -503,11 +513,70 @@ CHANGE DRIVER VEHICLE MODAL
             $('#assignedDriver').modal('show');
         }
 
+        //SET DRIVER ID AND STORE TO INPUT HIDDEN
+        $('#selectedAssignedDriverId').on('change',() => {
+            var DriverId = $('#selectedAssignedDriverId').val();
+            $('#assignedDriverId').val(DriverId);
+        })
+
+        //SUBMIT FUNCTION TO ASSIGNED DRIVER
+        $('#submitDriverAssigned').on('click', () => {
+            var assignedDriverId = $('#assignedDriverId').val();
+            var assignedDriverVehicleId = $('#assignedDriverVehicleId').val();
+            var swal = Swal.fire({
+                title: 'Please Wait',
+                text: 'Assigned Driver to Vehicle ...',
+                icon: 'info',
+                allowOutsideClick: false,
+                showCancelButton: false,
+                showConfirmButton: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "{{ route('assigned.vehicle.driver') }}",
+                data: {
+                    '_token': "{{ csrf_token() }}",
+                    'driver_id': assignedDriverId,
+                    'vehicle_id': assignedDriverVehicleId
+                },
+                success: function(response) {
+                    location.reload();
+
+                }
+            });
+        })
+
+
+        //GET ID OF VEHICLE TO CHANGE VEHICLE DRIVER
+        const onClickChangeDriver = (id) => {
+            axios.get('/vehicle/change/driver/'+id)
+                .then(function(response) {
+                    response.data.forEach(value => {
+                        $('#changedDriverVehicleId').val(value.id);
+                        $('#changeDriverVehicleType').text(value.vehicle_type);
+                        $('#changeDriverVehiclePlateNo').text(value.plate_no);
+                    });
+                })
+                .catch(function(error) {
+                    console.log(error);
+                })
+            $('#changeDriver').modal('show');
+        }
+
+        //SET DRIVER ID AND STORE TO INPUT HIDDEN
+        $('#selectedChangeDriverId').on('change',() => {
+            var DriverId = $('#selectedChangeDriverId').val();
+            $('#changedDriverId').val(DriverId);
+        })
 
         //SUBMIT FUNCTION TO CHANGE DRIVER
         $('#submitChangeDriver').on('click', () => {
-            var selectedChangeDriverId = $('#selectedChangeDriver').val();
-            var changeVehicleDriver = $('#changeVehicleDriverId').val();
+            var changedDriverId = $('#changedDriverId').val();
+            var changedDriverVehicleId = $('#changedDriverVehicleId').val();
+            console.log(changedDriverId, changedDriverVehicleId);
             var swal = Swal.fire({
                 title: 'Please Wait',
                 text: 'Changed Driver to Vehicle ...',
@@ -525,70 +594,17 @@ CHANGE DRIVER VEHICLE MODAL
                 url: "{{ route('change.vehicle.driver') }}",
                 data: {
                     '_token': "{{ csrf_token() }}",
-                    'driver_id': selectedChangeDriverId,
-                    'vehicle_id': changeVehicleDriver
+                    'driver_id': changedDriverId,
+                    'vehicle_id': changedDriverVehicleId
                 },
                 success: function(response) {
+                    console.log(response);
                     location.reload();
-                    $('#assignedDriver').modal('hide');
-                    if (response.status == 'ERROR') {
-                        Swal.fire({
-                            title: 'Error',
-                            text: response.message,
-                            icon: 'error'
-                        });
-                    } else if (response.status == "WARNING") {
-                        Swal.fire({
-                            title: 'Warning',
-                            text: response.message,
-                            icon: 'warning'
-                        });
-                    } else if (response.status == "OK") {
-                        Swal.fire({
-                            title: 'Success',
-                            text: response.message,
-                            icon: 'success'
-                        }).then((result) => {
-                            view_request();
-                        })
-                    }
-
                 }
             });
         })
 
-        //SUBMIT FUNCTION TO ASSIGNED DRIVER
-        $('#submitDriverAssigned').on('click', () => {
-            var selectedAssignedDriverId = $('#selectedAssignedDriverId').val();
-            var vehicleId = $('#vehicleId').val();
-            console.log(vehicleId);
-            var swal = Swal.fire({
-                title: 'Please Wait',
-                text: 'Assigned Driver to Vehicle ...',
-                icon: 'info',
-                allowOutsideClick: false,
-                showCancelButton: false,
-                showConfirmButton: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                }
-            });
-
-            $.ajax({
-                type: "POST",
-                url: "{{ route('update.vehicle.driver') }}",
-                data: {
-                    '_token': "{{ csrf_token() }}",
-                    'driver_id': selectedAssignedDriverId,
-                    'vehicle_id': vehicleId
-                },
-                success: function(response) {
-                    location.reload();
-
-                }
-            });
-        })
-
+     
 
 
 

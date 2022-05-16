@@ -6,6 +6,7 @@ use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Vehicle;
+use Yajra\DataTables\Facades\DataTables;
 
 class AdminController extends Controller
 {
@@ -15,12 +16,35 @@ class AdminController extends Controller
         $vehiclesCount = Vehicle::count();
         $reservationsCount = Reservation::where('reservation_date', now()->format('Y-m-d'))->count();
         
-        $allReservationTodays = Reservation::where('reservation_date', now()->format('Y-m-d'))
-        ->join('vehicles', 'reservations.vehicle_id', 'vehicles.id')
-        ->join('drivers','vehicles.driver_id','drivers.id')
-        ->join('users', 'drivers.user_id', 'users.id')
-        ->get();
-        return view('content.admin.admin_dashboard',compact('allReservationTodays', 'vehiclesCount', 'reservationsCount'));
+    
+    
+        return view('content.admin.admin_dashboard',compact( 'vehiclesCount', 'reservationsCount'));
+    }
+
+
+    public function get_all_reservationToday(){
+        try{
+            $allReservationTodays = Reservation::
+            leftJoin('vehicles', 'reservations.vehicle_id', 'vehicles.id')
+            ->join('drivers','vehicles.driver_id','drivers.id')
+            ->join('users', 'drivers.user_id', 'users.id')
+            ->select('users.name AS driver_name',
+            'vehicles.vehicle_type',
+            'vehicles.plate_no',
+            'reservations.reservation_date',
+            'reservations.created_at AS createdAt',
+            )
+            ->where('reservations.reservation_status', '=', 'approve')
+            ->where('reservation_date', now()->format('Y-m-d'))
+         
+           ->get();
+            info($allReservationTodays);
+            return  DataTables::of($allReservationTodays)
+            ->make(true);
+        }catch(\Throwable $error){
+            info($error->getMessage());
+        }
+ 
     }
 
     public function user_accounts(){

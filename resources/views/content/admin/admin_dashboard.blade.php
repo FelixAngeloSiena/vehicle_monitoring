@@ -98,7 +98,7 @@
                 <h1 class="h3 mb-3"><strong>Today's</strong> Reservation</h1>
                 <div class="card">
                     <div class="card-body shadow-sm">
-                        <table id="example" class="table-striped display" cellspacing="0" width="100%">
+                        <table id="reservationTodayInitTable" class="table-striped display" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>Driver Name</th>
@@ -106,27 +106,11 @@
                                     <th>Vehicle Plate#</th>
                                     <th>Date Reserve</th>
                                     <th>Created_at</th>
-                                    @if (Auth::user()->role == 'manager')
-                                        <th>Action</th>
-                                    @endif
                                   
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($allReservationTodays as $allReservationToday)
-                                    <tr>
-                                        <td>{{ $allReservationToday->name }}</td>
-                                        <td>{{ $allReservationToday->vehicle_type }}</td>
-                                        <td>{{ $allReservationToday->plate_no }}</td>
-                                        <td>{{ $allReservationToday->reservation_date }}</td>
-                                        <td>{{ date('Y-m-d', strtotime($allReservationToday->created_at)) }}</td>
-                                        @if (Auth::user()->role == 'manager')
-                                        <td>
-                                            <button type="button" class="btn btn-danger"><i class="fas fa-ban"></i> Cancel </button>
-                                        </td>
-                                        @endif
-                                    </tr>
-                                @endforeach
+                             
                             </tbody>
                         </table>
                     </div>
@@ -135,4 +119,32 @@
         </div>
     </div>
 
+@endsection
+
+@section('script')
+<script>
+
+$( document ).ready(function() {
+    $('#reservationTodayInitTable').DataTable({
+            dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel', 'pdf', 'print',
+                ],
+            destroy: true,
+            responsive: true,
+            serverSide:true,
+            processing:true,
+            ajax:'/dashboard/fetch/reservation',
+            columns:[
+                {'data':'driver_name'},
+                {'data':'vehicle_type'},
+                {'data':'plate_no' },
+                {'data':'reservation_date'},
+                {'data':'createdAt'},
+            ]
+        });
+});
+     
+
+</script>
 @endsection

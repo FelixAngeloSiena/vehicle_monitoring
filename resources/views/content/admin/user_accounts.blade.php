@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    {{-- --------------------------------------------------------
+{{----------------------------------------------------------
 Add another user Modal
 --------------------------------------------------------- --}}
 
@@ -113,7 +113,6 @@ Add another user Modal
                 url: "{{ route('create.user') }}",
                 data: data,
                 success: function(response) {
-                    console.log(response);
                     location.reload();
                     $('#create-user').modal('hide');
                     if (response.status == 'ERROR') {
