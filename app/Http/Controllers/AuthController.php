@@ -27,7 +27,7 @@ class AuthController extends Controller
                 if( $checkRoles == 'driver'){
                     return redirect()->route('driver.dashboard'); 
                 }
-                if($checkRoles == 'logistic' || $checkRoles == 'admin'){
+                if($checkRoles == 'logistic' || $checkRoles == 'admin' || $checkRoles == 'manager'){
                     return redirect()->route('admin_dashboard');
                 }
                 if($checkRoles == 'requestor'){

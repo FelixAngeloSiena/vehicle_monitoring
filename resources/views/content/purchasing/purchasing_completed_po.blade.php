@@ -45,7 +45,7 @@
             responsive: true,
             serverSide:true,
             processing:true,
-            ajax:'/purchasing/fetch/request/completed',
+            ajax:'',
             columns:[
                 {'data':'id'},
                 {'data':'vehicle_type'},

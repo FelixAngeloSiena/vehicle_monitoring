@@ -71,7 +71,15 @@ Route::middleware('auth')->group(function(){
 Route::middleware('auth')->group(function(){
     Route::controller(ReservationController::class)->group(function () {
         Route::get('/vehicles/reservation', 'vehicle_reservation')->name('vehicle.view.reservation');
+        Route::get('/vehicle/cancel/reservation', 'vehicle_cancel_reservation')->name('view.cancel.reservation');
+        Route::get('/vehicle/approve/reservation', 'vehicle_approve_reservation')->name('view.approve.reservation');
+
+    
         Route::get('/fetch/reservation', 'get_all_reservation')->name('vehicle.fetch.reservation');
+        Route::get('/fetch/cancel', 'get_cancel_reservation')->name('vehicle.fetch.cancel');
+        Route::get('/fetch/approve', 'get_approve_reservation')->name('vehicle.fetch.approve');
+        Route::get('/cancel/reservation/{id}', 'cancel_reservation')->name('cancel.reservation');
+        Route::get('/approve/reservation/{id}', 'approve_reservation')->name('approve.reservation');
     });
 });
 
@@ -172,7 +180,6 @@ Route::controller(PurchasingController::class)->prefix('purchasing')->group(func
 
     Route::get('/fetch/request/completed', 'fetch_request_completed')->name('purchasing.request.completed');
 
-  
 });
 
 

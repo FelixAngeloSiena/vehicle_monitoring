@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedInteger('user_id');
             $table->string('reservation_date');
             $table->string('reservation_status');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

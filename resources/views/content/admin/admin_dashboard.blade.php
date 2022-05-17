@@ -126,10 +126,6 @@
 
 $( document ).ready(function() {
     $('#reservationTodayInitTable').DataTable({
-            dom: 'Bfrtip',
-                buttons: [
-                    'csv', 'excel', 'pdf', 'print',
-                ],
             destroy: true,
             responsive: true,
             serverSide:true,
