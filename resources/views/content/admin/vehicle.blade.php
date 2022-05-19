@@ -9,11 +9,11 @@
             <div class="col-md-12">
                 <div class="d-flex justify-content-between">
                     <h1 class="h3 mb-3"><strong>Vehicle</strong> Records</h1>
-                    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal"
-                        data-bs-target="#createVehicleModal" style="color:#fff;font-size:17px;font-weight:bold">
+                    <button type="button" class="btn  mb-3" data-bs-toggle="modal"
+                        data-bs-target="#createVehicleModal" style="color:#fff;font-size:17px;font-weight:bold;background-color:#251D3A">
                         <img src="https://img.icons8.com/external-anggara-glyph-anggara-putra/25/ffffff/external-edit-basic-ui-anggara-glyph-anggara-putra.png"/> Add another vehicle</button>
                 </div>
-                <div class="card">
+                <div class="card" style="border: 1px solid #251D3A">
                     <div class="card-body shadow-sm">
 
                         <table id="vehiclesTable" class="table-striped display" cellspacing="0" width="100%">
@@ -45,16 +45,16 @@
                                         <td>{{ $vehicle->driver_id === null ? 'No Driver Assigned' : $vehicle->name }}
                                         </td>
                                         <td>
-                                            <a href="{{route('vehicle.details', $vehicle->id)}}" class="btn btn-primary">
+                                            <a href="{{route('vehicle.details', $vehicle->id)}}" class="btn" style="background-color: #251D3A;color:#fff;">
                                                 <i class="fas fa-eye"></i> 
                                                 View Details
                                             </a>   
                                             @if ($vehicle->driver_id === null)
-                                                <button type="button" class="btn btn-danger"
+                                                <button type="button" class="btn" style="background-color:#9F0022;color:#fff;"
                                                     onclick="onClickAssignedDriver({{ $vehicle->id }})"><i
                                                         class="fas fa-user-edit"></i> Assign Driver</button>
                                             @else
-                                                <button type="button" class="btn btn-danger"
+                                                <button type="button" class="btn"  style="background-color:#9F0022; color:#fff;"
                                                     onclick="onClickChangeDriver({{ $vehicle->id }})"><i
                                                         class="fas fa-random"></i> Change Driver</button>
                                             @endif
@@ -77,7 +77,7 @@ MODAL CREATE NEW VEHICLE
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" style="background-color:#F4F3EF">
-            <div class="d-flex justify-content-between p-3" style="background-color: #3B7DDD;">
+            <div class="d-flex justify-content-between p-3" style="background-color: #251D3A;">
                 <h5 class="modal-title" id="modal-reservation-title"
                     style="color:#fff;font-size:20px;font-weight:bold">Create Vehicle</h5>
                 <i class="fas fa-times fa-2x" data-bs-dismiss="modal" style="cursor: pointer;color:#fff"></i>
@@ -289,7 +289,7 @@ MODAL CREATE NEW VEHICLE
                             </div>
 
                             <div class="d-grid gap-2">
-                                <button type="submit" id="submitVehicleInfo" class="btn btn-primary mb-3"> Submit
+                                <button type="submit" id="submitVehicleInfo" class="btn mb-3" style="background-color: #251D3A;color:#fff;font-size:17px;"> Submit
                                 </button>
                             </div>
                         </div>
@@ -383,36 +383,35 @@ CHANGE DRIVER VEHICLE MODAL
 @section('script')
     <script>
 
-                $('#vehiclesTable').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [
-                        {
-                            extend: 'csv',
-                                exportOptions: {
-                                columns: [ 0,1,2,3,4,5,6,7,8 ]
-                            }    
-                        },
-                        {
-                            extend: 'excel',
-                                exportOptions: {
-                                columns: [ 0,1,2,3,4,5,6,7,8 ]
-                            },    
-                        },
-                        {
-                            extend: 'pdf',
-                                exportOptions: {
-                                columns: [ 0,1,2,3,4,5,6,7,8 ]
-                            },    
-                        },
-                            
-                    ],
+        $('#vehiclesTable').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'csv',
+                        exportOptions: {
+                        columns: [ 0,1,2,3,4,5,6,7,8 ]
+                    }    
+                },
+                {
+                    extend: 'excel',
+                        exportOptions: {
+                        columns: [ 0,1,2,3,4,5,6,7,8 ]
+                    },    
+                },
+                {
+                    extend: 'pdf',
+                        exportOptions: {
+                        columns: [ 0,1,2,3,4,5,6,7,8 ]
+                    },    
+                },
                     
-                    destroy: true,
-                    responsive: true,
-                });
+            ],
+            
+            destroy: true,
+            responsive: true,
+        });
 
                 
-
         //ONCHANGE FUNCTION OF COMPANY TO SHOW HIS DEPARTMENT
         $('#selectedCompany').on('change', () => {
             var vehicleCompanyId = $('#selectedCompany').val();

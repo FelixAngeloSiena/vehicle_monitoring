@@ -25,16 +25,31 @@
 }
 
 
+.card-login::before{
+    content: "";
+    background: #251D3A;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: rotate(5deg);
+    z-index: -1;
+
+}
+
+
 .form-check-input:focus{
     box-shadow: none;
 }
 
 #userInput, #passwordInput{
     border: 1px solid #251D3A;
+    font-family: 'Kanit', sans-serif;
 }
 #userInput:focus{
     box-shadow: none;
+    font-family: 'Kanit', sans-serif;
 }
 #passwordInput:focus{
     box-shadow: none;
+    font-family: 'Kanit', sans-serif;
 }

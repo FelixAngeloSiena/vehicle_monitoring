@@ -70,73 +70,73 @@
                           <div class="row">
                               <div class="col-md-2">
                                   <div class="card" id="odoLogs" onclick="onClickOdoLogs({{$id}})"
-                                      style="border:solid 1px#FF0066;border-radius:0px;box-shadow: -2px 2px 109px -35px rgba(0,0,0,0.6);">
+                                      style="border:solid 1px#251D3A;border-radius:0px;box-shadow: -2px 2px 109px -35px rgba(0,0,0,0.6);">
                                       <div class="card-body px-2 py-3">
                                           <div id="icon-container">
                                               <img src="{{ asset('img/odo_icon.webp') }}" style="max-width: 63%"
                                                   class="img-responsive">
                                           </div>
-                                          <h4 class="mb-0 text-center" id="icon-title" style="background-color: #FF0066;color:#fff;padding:10px 20px">Odo Kilometers</h4>
+                                          <h4 class="mb-0 text-center" id="icon-title" style="background-color: #251D3A;color:#fff;padding:10px 20px">Odo Kilometers</h4>
                                       </div>
                                   </div>
                               </div>
                               <div class="col-md-2">
                                   <div class="card" id="registrationLogs" onclick="onClickRegistrationLogs({{$id}})"
-                                  style="border:solid 1px#FF0066;border-radius:0px;box-shadow: -2px 2px 109px -35px rgba(0,0,0,0.6);">
+                                  style="border:solid 1px#251D3A;border-radius:0px;box-shadow: -2px 2px 109px -35px rgba(0,0,0,0.6);">
                                       <div class="card-body px-2 py-3">
                                           <div id="icon-container">
                                               <img src="{{ asset('img/registration_icon.webp') }}"
                                                   style="max-width: 75%" class="img-responsive">
                                           </div>
-                                          <h4 class="mb-0 text-center" id="icon-title"  style="background-color: #FF0066;color:#fff;padding:10px 20px">Registration</h4>
+                                          <h4 class="mb-0 text-center" id="icon-title"  style="background-color: #251D3A;color:#fff;padding:10px 20px">Registration</h4>
                                       </div>
                                   </div>
                               </div>
                               <div class="col-md-2">
                                   <div class="card" id="tireLogs" onclick="onClickTireLogs({{$id}})"
-                                  style="border:solid 1px#FF0066;border-radius:0px;box-shadow: -2px 2px 109px -35px rgba(0,0,0,0.6);">
+                                  style="border:solid 1px#251D3A;border-radius:0px;box-shadow: -2px 2px 109px -35px rgba(0,0,0,0.6);">
                                       <div class="card-body">
                                           <div id="icon-container">
                                               <img src="{{ asset('img/tire_icon.webp') }}" style="max-width: 60%"
                                                   class="img-responsive">
                                           </div>
-                                          <h4 class="mb-0 text-center" id="icon-title" style="background-color: #FF0066;color:#fff;padding:10px 20px">Tires</h4>
+                                          <h4 class="mb-0 text-center" id="icon-title" style="background-color: #251D3A;color:#fff;padding:10px 20px">Tires</h4>
                                       </div>
                                   </div>
                               </div>
                               <div class="col-md-2">
                                   <div class="card" id="batteryLogs" onclick="onClickBatteryLogs({{$id}})"
-                                  style="border:solid 1px#FF0066;border-radius:0px;box-shadow: -2px 2px 109px -35px rgba(0,0,0,0.6);">
+                                  style="border:solid 1px#251D3A;border-radius:0px;box-shadow: -2px 2px 109px -35px rgba(0,0,0,0.6);">
                                       <div class="card-body">
                                           <div id="icon-container">
                                               <img src="{{ asset('img/battery_icon.webp') }}" style="max-width: 72%"
                                                   class="img-responsive">
                                           </div>
-                                          <h4 class="mb-0 text-center" id="icon-title" style="background-color: #FF0066;color:#fff;padding:10px 20px">Battery</h4>
+                                          <h4 class="mb-0 text-center" id="icon-title" style="background-color: #251D3A;color:#fff;padding:10px 20px">Battery</h4>
                                       </div>
                                   </div>
                               </div>
                               <div class="col-md-2">
                                   <div class="card" id="insuranceLogs"  onclick="onClickInsuranceLogs({{$id}})"
-                                  style="border:solid 1px#FF0066;border-radius:0px;box-shadow: -2px 2px 109px -35px rgba(0,0,0,0.6);">
+                                  style="border:solid 1px#251D3A;border-radius:0px;box-shadow: -2px 2px 109px -35px rgba(0,0,0,0.6);">
                                       <div class="card-body">
                                           <div id="icon-container">
                                               <img src="{{ asset('img/insurance_icon.webp') }}" class="py-2" style="max-width: 100%"
                                                   class="img-responsive">
                                           </div>
-                                          <h4 class="mb-0 text-center" id="icon-title" style="background-color: #FF0066;color:#fff;padding:10px 20px">Insurance</h4>
+                                          <h4 class="mb-0 text-center" id="icon-title" style="background-color: #251D3A;color:#fff;padding:10px 20px">Insurance</h4>
                                       </div>
                                   </div>
                               </div>
                               <div class="col-md-2">
                                   <div class="card" id="pmsLogs"  onclick="onClickPmsLogs({{$id}})"
-                                  style="border:solid 1px#FF0066;border-radius:0px;box-shadow: -2px 2px 109px -35px rgba(0,0,0,0.6);">
+                                  style="border:solid 1px#251D3A;border-radius:0px;box-shadow: -2px 2px 109px -35px rgba(0,0,0,0.6);">
                                       <div class="card-body">
                                           <div id="icon-container">
                                               <img src="{{ asset('img/pms_icon.webp') }}" style="max-width: 92%"
                                                   class="img-responsive">
                                           </div>
-                                          <h4 class="mb-0 text-center" id="icon-title" style="background-color: #FF0066;color:#fff;padding:10px 20px">PMS</h4>
+                                          <h4 class="mb-0 text-center" id="icon-title" style="background-color: #251D3A;color:#fff;padding:10px 20px">PMS</h4>
                                       </div>
                                   </div>
                               </div>
@@ -154,7 +154,7 @@ ODO METER LOGS MODAL
 <div class="modal fade" id="odoLogsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" style="background-color:#F4F3EF">
-            <div class="d-flex justify-content-between p-3" style="background-color: #3B7DDD;">
+            <div class="d-flex justify-content-between p-3" style="background-color: #251D3A;">
                 <h5 class="modal-title" id="modal-reservation-title"
                     style="color:#fff;font-size:20px;font-weight:bold">Vehicle Odo Meter Logs</h5>
                 <i class="fas fa-times fa-2x" data-bs-dismiss="modal" style="cursor: pointer;color:#fff"></i>
@@ -192,7 +192,7 @@ TIRE MODAL
 <div class="modal fade" id="tireLogsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" style="background-color:#F4F3EF">
-            <div class="d-flex justify-content-between p-3" style="background-color: #3B7DDD;">
+            <div class="d-flex justify-content-between p-3" style="background-color: #251D3A;">
                 <h5 class="modal-title" id="modal-reservation-title"
                     style="color:#fff;font-size:20px;font-weight:bold">Vehicle Tire Logs</h5>
                 <i class="fas fa-times fa-2x" data-bs-dismiss="modal" style="cursor: pointer;color:#fff"></i>
@@ -231,12 +231,49 @@ REGISTRATION MODAL
 <div class="modal fade" id="registrationLogsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" style="background-color:#F4F3EF">
-            <div class="d-flex justify-content-between p-3" style="background-color: #3B7DDD;">
+            <div class="d-flex justify-content-between p-3" style="background-color: #251D3A;">
               <h5 class="modal-title" id="modal-reservation-title"
                   style="color:#fff;font-size:20px;font-weight:bold">Vehicle Registration Logs</h5>
               <i class="fas fa-times fa-2x" data-bs-dismiss="modal" style="cursor: pointer;color:#fff"></i>
             </div>
             <div class="modal-body">
+                @if(Auth::user()->role == 'logistic')
+                <div class="card">
+                    <div class="card-body">
+                        <form id="updateRegistrationForm">
+                            @csrf
+                            <div class="row">
+                                <input type="hidden" name="vehicleId" value="{{$id}}" />
+
+                                <table class="table  table-striped">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">Date Registered:</th>
+                                        <th scope="col">Date Registration Expired:</th>
+                                        <th scope="col">Action</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <td><input type="date" value="" class="form-control" id="date_vehicle_registration" name="date_vehicle_registration"></td>
+                                        <td> <input type="date" value="" class="form-control" id="date_vehicle_xpiration" name="date_vehicle_xpiration"></td>
+                                        <td>
+                                        <button type="submit" class="btn"
+                                            style="color:#fff;font-size:15px;font-weight:bold;background-color:#251D3A">
+                                            <img src="https://img.icons8.com/external-anggara-glyph-anggara-putra/20/ffffff/external-edit-basic-ui-anggara-glyph-anggara-putra.png"/>
+                                                Re-new Registration
+                                        </button>
+                                        </td>
+                                      </tr>
+                                
+                                    </tbody>
+                                  </table>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                @endif
+
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -266,7 +303,7 @@ BATTERY MODAL
 <div class="modal fade" id="batteryLogsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 				<div class="modal-content" style="background-color:#F4F3EF">
-						<div class="d-flex justify-content-between p-3" style="background-color: #3B7DDD;">
+						<div class="d-flex justify-content-between p-3" style="background-color: #251D3A;">
 							<h5 class="modal-title" id="modal-reservation-title"
 									style="color:#fff;font-size:20px;font-weight:bold">Vehicle Battery Logs</h5>
 							<i class="fas fa-times fa-2x" data-bs-dismiss="modal" style="cursor: pointer;color:#fff"></i>
@@ -302,12 +339,48 @@ INSURANCE MODAL
 <div class="modal fade" id="insuranceLogsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" style="background-color:#F4F3EF">
-            <div class="d-flex justify-content-between p-3" style="background-color: #3B7DDD;">
+            <div class="d-flex justify-content-between p-3" style="background-color: #251D3A;">
             <h5 class="modal-title" id="modal-reservation-title"
                 style="color:#fff;font-size:20px;font-weight:bold">Vehicle Insurance Logs</h5>
             <i class="fas fa-times fa-2x" data-bs-dismiss="modal" style="cursor: pointer;color:#fff"></i>
             </div>
             <div class="modal-body">
+            @if(Auth::user()->role == 'logistic')
+                <div class="card">
+                    <div class="card-body">
+                        <form id="insuranceFormUpdate">
+                            @csrf
+                        <div class="row">
+                            <input type="hidden" name="vehicleId" value="{{$id}}">
+                            <table class="table  table-striped">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Date of Insurance Registered:</th>
+                                    <th scope="col">Date of Insurance Expired:</th>
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td><input type="date" value="" class="form-control" id="date_insurance_applied" name="date_insurance_applied"></td>
+                                    <td><input type="date" value="" class="form-control" id="date_insurance_xpired" name="date_insurance_xpired"></td>
+                                    <td>
+                                    <button type="submit" class="btn" 
+                                        style="color:#fff;font-size:15px;font-weight:bold;background-color:#251D3A" >
+                                        <img src="https://img.icons8.com/external-anggara-glyph-anggara-putra/20/ffffff/external-edit-basic-ui-anggara-glyph-anggara-putra.png"/>
+                                        Re-new Insurance
+                                    </button>
+                                    </td>
+                                  </tr>
+                            
+                                </tbody>
+                              </table>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+                @endif
+
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -337,7 +410,7 @@ PREVENTIVE MAINTENANCE MODAL
 <div class="modal fade" id="pmsLogsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 				<div class="modal-content" style="background-color:#F4F3EF">
-						<div class="d-flex justify-content-between p-3" style="background-color: #3B7DDD;">
+						<div class="d-flex justify-content-between p-3" style="background-color: #251D3A;">
 								<h5 class="modal-title" id="modal-reservation-title"
 										style="color:#fff;font-size:20px;font-weight:bold">Vehicle Preventive Maintenance Logs</h5>
 								<i class="fas fa-times fa-2x" data-bs-dismiss="modal" style="cursor: pointer;color:#fff"></i>
@@ -366,7 +439,6 @@ PREVENTIVE MAINTENANCE MODAL
 				</div>
 		</div>
 </div>
-
 
 @endsection
 @section('script')
@@ -415,10 +487,9 @@ PREVENTIVE MAINTENANCE MODAL
                 });
         }
 
-        //INITIALIZE DATA OF REGISTRATION LOGS IN DATATABLE
-        const onClickRegistrationLogs = (id) => {
-            $('#registrationLogsModal').modal('show');
-                $('#registrationLogsInitTable').DataTable({
+        //FUNCTION INITIALIZE DATA OF REGISTRATION LOGS IN DATATABLE
+        const initTableRegistration = (id) => {
+            $('#registrationLogsInitTable').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
                     'csv', 'excel', 'pdf', 'print',
@@ -433,6 +504,15 @@ PREVENTIVE MAINTENANCE MODAL
                     {'data':'_date_expired' },
                 ]
             });
+        }
+
+
+
+        //INITIALIZE DATA OF REGISTRATION LOGS IN DATATABLE
+        const onClickRegistrationLogs = (id) => {
+            initTableRegistration(id);
+            $('#registrationLogsModal').modal('show');
+         
         }
 
         //INITIALIZE DATA OF BATTERY LOGS IN DATATABLE
@@ -456,24 +536,33 @@ PREVENTIVE MAINTENANCE MODAL
             });
         }
 
+
+        //FUNCTION INITIALIZE DATA OF REGISTRATION LOGS IN DATATABLE
+        const initTableInsurance = (id) => {
+            $('#insuranceLogsInitTable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                        'csv', 'excel', 'pdf', 'print',
+                ],
+                destroy: true,
+                responsive: true,
+                serverSide:true,
+                processing:true,
+                ajax:'/vehicle/insurance/logs/'+id,
+                columns:[
+                        {'data':'_date_insurance_applied' },
+                        {'data':'_date_insurance_expired' },
+                ]
+            });
+ 
+        }
+
+
         //INITIALIZE DATA OF BATTERY LOGS IN DATATABLE
         const onClickInsuranceLogs = (id) => {
+            initTableInsurance(id)
             $('#insuranceLogsModal').modal('show');
-                $('#insuranceLogsInitTable').DataTable({
-                        dom: 'Bfrtip',
-                        buttons: [
-                                'csv', 'excel', 'pdf', 'print',
-                        ],
-                        destroy: true,
-                        responsive: true,
-                        serverSide:true,
-                        processing:true,
-                        ajax:'/vehicle/insurance/logs/'+id,
-                        columns:[
-                                {'data':'_date_insurance_applied' },
-                                {'data':'_date_insurance_expired' },
-                        ]
-                });
+       
         }
 
         //INITIALIZE DATA OF PMS LOGS IN DATATABLE
@@ -522,6 +611,62 @@ PREVENTIVE MAINTENANCE MODAL
                     }
             });
         });
+
+        //UPDATE REGISTRATION FORM 
+        $('#updateRegistrationForm').on('submit', (e) => {
+            e.preventDefault();
+            var swal = Swal.fire({
+                    title: 'Please Wait',
+                    text: 'Updating Vehicle Registration ...',
+                    icon: 'info',
+                    allowOutsideClick: false,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    didOpen: () => {
+                     Swal.showLoading();
+                    }
+            });
+
+            var data = $('#updateRegistrationForm').serializeArray();
+            $.ajax({
+                    type: "POST",
+                    url: "{{route('vehicle.update.registration')}}",
+                    data: data,
+                    success: function(response) {
+                        initTableRegistration(response.id);
+                        swal.close();
+            }
+        });
+    });
+
+    
+    $('#insuranceFormUpdate').on('submit', (e) => {
+            e.preventDefault();
+            var swal = Swal.fire({
+                    title: 'Please Wait',
+                    text: 'Updating Vehicle Insurance ...',
+                    icon: 'info',
+                    allowOutsideClick: false,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    didOpen: () => {
+                     Swal.showLoading();
+                    }
+            });
+
+            var data = $('#insuranceFormUpdate').serializeArray();
+            $.ajax({
+                    type: "POST",
+                    url: "{{route('vehicle.update.insurance')}}",
+                    data: data,
+                    success: function(response) {
+                        initTableInsurance(response.id);
+                        swal.close();
+            }
+        });
+    });
+
+
 
     </script>
 @endsection

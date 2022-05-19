@@ -39,13 +39,14 @@ class AuthController extends Controller
                 if($checkRoles == 'purchasing'){
                     return redirect()->route('purchasing.dashboard');
                 }
+                if($checkRoles == 'approver'){
+                    return redirect()->route('approver.dashboard');
+                }
                 
             }
             Session::flash("error", "Invalid Credentials");
-            return 'error';
             return redirect()->back();
              } catch (\Throwable $th) {
-            return $th;
             Session::flash("error", $th->getMessage());
             return redirect()->back();
         }

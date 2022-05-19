@@ -11079,8 +11079,8 @@ a.sidebar-link svg {
     rgba(59, 125, 221, 0.088) 50%,
     transparent
   );
-  border-left-color: #FF0066;
-  color: #FF0066;
+  border-left-color: #fff;
+  color: #fff;
 }
 .sidebar-item.active .sidebar-link:hover i,
 .sidebar-item.active .sidebar-link:hover svg,

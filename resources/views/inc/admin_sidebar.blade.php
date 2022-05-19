@@ -6,8 +6,8 @@
                 <img src="{{asset('img/FMLC1.png')}}" class="img-responsive mt-2" style="max-width: 100%;"/> 
               </div>
               <div class="col-9 ps-0">
-                <p class="mb-0" style="font-size: 25px;color:#fff"> Online Vehicle</p> 
-                <p style="font-size: 16px;line-height:2px;color:#fff;font-weight:500">Reservation&Monitoring</p> 
+                <p class="mb-0" style="font-size: 30px;color:#fff;font-weight:bold"> Filipinas </p> 
+                <p style="font-size: 16px;line-height:2px;color:#fff;font-weight:500">Multi-Line Corp.</p> 
               </div>
             </div>
         </div>
@@ -86,15 +86,38 @@
           </a>
         </li>
 
+
+    {{-- APPROVER SIDE BAR --}}
+        @elseif (Auth::user()->role == 'approver')
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{{route('approver.dashboard')}}">
+            <img src="https://img.icons8.com/fluency-systems-regular/25/ffffff/dashboard-layout.png"/>
+            <span class="align-middle">Request Dashboard</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{{route('approver.approve')}}">
+            <img src="https://img.icons8.com/windows/25/ffffff/sign-document.png"/>
+            <span class="align-middle">Approve Reservations</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{{route('approver.cancel')}}">
+            <img src="https://img.icons8.com/ios/25/ffffff/checked--v1.png"/>
+            <span class="align-middle">Cancel Reservations</span>
+          </a>
+        </li>
+
+
     {{-- MANAGER SIDE BAR --}}
         @elseif (Auth::user()->role == 'manager')
+
         <li class="sidebar-item {{ request()->routeIs('admin_dashboard') ? 'active' : '' }}">
           <a class="sidebar-link" href="{{route('admin_dashboard')}}">
             <ion-icon name="podium-outline" class="align-middle" style="font-size: 20px;"></ion-icon>
             <span class="align-middle" style="font-size:18px;">Dashboard</span>
           </a>
         </li>
-
 
         <li class="sidebar-item accordion" id="accordionExample">
           <a class="sidebar-link collapsed "  href="#" data-bs-toggle="collapse" data-bs-target="#approver-collapse" aria-expanded="true" >
@@ -117,14 +140,12 @@
                   </a>
                 </li>
 
-                
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="{{route('view.cancel.reservation')}}">
                     <img src="https://img.icons8.com/color/23/000000/cancel-2--v1.png"/>
                     <span class="align-middle" style="font-size:18px;">Cancelation</span>
                   </a>
                 </li>
-
 
               </ul>
             </div>
@@ -142,29 +163,38 @@
       @elseif (Auth::user()->role == 'logistic' || Auth::user()->role == 'admin')
           <li class="sidebar-item {{ request()->routeIs('admin_dashboard') ? 'active' : '' }}">
             <a class="sidebar-link" href="{{route('admin_dashboard')}}">
-              <ion-icon name="podium-outline" class="align-middle" style="font-size: 20px;"></ion-icon>
-              <span class="align-middle" style="font-size:18px;">Dashboard</span>
+              <img src="https://img.icons8.com/glyph-neue/25/ffffff/bar-chart.png"/>
+              <span class="align-start" style="font-size:18px;"> Dashboard</span>
             </a>
           </li>
 
 
           <li class="sidebar-item accordion" id="accordionExample">
             <a class="sidebar-link collapsed "  href="#" data-bs-toggle="collapse" data-bs-target="#approver-collapse" aria-expanded="true" >
-              <img src="https://img.icons8.com/color/30/000000/overtime.png"/> <span class="align-middle">Reservations</span><span style="float: right" class="mt-1"><img src="https://img.icons8.com/ios-filled/15/738A96/right-down2.png"/></span>
+              <img src="https://img.icons8.com/glyph-neue/25/ffffff/overtime.png"/>
+                <span >Reservations</span><span style="float: right">
+                <img src="https://img.icons8.com/ios-filled/15/738A96/right-down2.png"/></span>
             </a>
               <div class="collapse" id="approver-collapse">
                 <ul class="sidebar-nav ps-3">
                   
                   <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('vehicle.view.reservation')}}">
-                      <img src="https://img.icons8.com/color/25/000000/thumb-up--v1.png"/>
+                      <i class="fas fa-file-signature"></i>
                       <span class="align-middle" style="font-size:18px;">For Approval</span>
                     </a>
                   </li>
 
                   <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('view.approve.reservation')}}">
-                      <img src="https://img.icons8.com/color/25/000000/checked-radio-button--v1.png"/>
+                      <i class="fas fa-check"></i>
+                      <span class="align-middle" style="font-size:18px;">Approve</span>
+                    </a>
+                  </li>
+
+                  <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{route('view.completed.reservation')}}">
+                      <i class="fas fa-check-double"></i>
                       <span class="align-middle" style="font-size:18px;">Completed</span>
                     </a>
                   </li>
@@ -172,12 +202,10 @@
                   
                   <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('view.cancel.reservation')}}">
-                      <img src="https://img.icons8.com/color/23/000000/cancel-2--v1.png"/>
+                      <i class="fas fa-ban"></i>
                       <span class="align-middle" style="font-size:18px;">Cancelation</span>
                     </a>
                   </li>
-
-
                 </ul>
               </div>
           </li>
@@ -186,22 +214,19 @@
 
           <li class="sidebar-item {{ request()->routeIs('vehicles') ? 'active' : '' }}">
             <a class="sidebar-link" href="{{route('vehicles')}}">
-              <ion-icon name="car-outline" class="align-middle" style="font-size: 22px;"></ion-icon>
+              <img src="https://img.icons8.com/glyph-neue/25/ffffff/car-service.png"/>
               <span class="align-middle" style="font-size:18px;"> Vehicles</span>
             </a>
           </li>
 
           <li class="sidebar-item {{ request()->routeIs('vehicle.driver') ? 'active' : '' }}">
             <a class="sidebar-link" href="{{route('vehicle.driver')}}">
-              <ion-icon name="timer-outline" class="align-middle"  style="font-size: 22px;"></ion-icon>
+              <img src="https://img.icons8.com/glyph-neue/25/ffffff/group.png"/>
                 <span class="align-middle" style="font-size:18px;"> Drivers</span>
             </a>
           </li>
 
-    
-
-          
-
+  
 
     {{-- ADMIN SIDE BAR --}} 
         @if (Auth::user()->role == 'admin')

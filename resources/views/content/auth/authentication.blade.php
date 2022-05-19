@@ -11,15 +11,18 @@
                     <img src="{{asset('img/FMLC1.png')}}" class="img-responsive" style="max-width: 100%;"/> 
                   </div>
                   <div class="col-9 ps-0">
-                    <p class="mb-0" style="font-size: 30px;font-weight:bold;color:#fff;margin-top:30px"> Online Vehicle</p> 
-                    <p class="mb-0" style="font-size: 20px;line-height:2px;color:#fff">Reservation & Monitoring System</p> 
+                    <p class="mb-0" style="font-size: 50px;font-weight:bold;color:#fff;"> Filipinas</p> 
+                    <p class="mb-0" style="font-size: 25px;line-height:5px;color:#fff">Multi-line Corp.</p> 
                   </div>
                 </div>
               </div>
               <div class="card-body ">
-                      {{-- <div class="alert alert-danger py-2 alert-dismissible fade show"  style="font-size: 13px;font-weight:600;padding-right:20px" role="alert">
-                        <p class="mb-0"><i class="fas fa-exclamation-triangle"></i> Invalid Credentials  <span style="float: right;cursor: pointer;" data-bs-dismiss="alert" aria-label="Close"><i class="fas fa-times"></i></span></p>
-                       </div> --}}
+               @if (Session::has('error'))
+                    <div class="alert alert-danger py-2 alert-dismissible fade show"  style="font-size: 15px;padding-right:20px" role="alert">
+                      <p class="mb-0"><i class="fas fa-exclamation-circle"></i> Invalid Credentials  <span style="float: right;cursor: pointer;" data-bs-dismiss="alert" aria-label="Close"><i class="fas fa-times"></i></span></p>
+                    </div>
+               @endif
+                   
                 <form action="{{route('attempt.login')}}" method="POST" autocomplete="off">
                   @csrf
                     <div class="mb-3">

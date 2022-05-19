@@ -368,6 +368,7 @@ class VehicleController extends Controller
     return view('content.vehicle.vehicle_request_maintenance',compact('vehicles'));
   }
 
+
   //SET ALL MAINTENANCE REQUEST TO THE DATATABLE
   public function request_maintenance_record(){
     $requestMaintenance = RequestMaintenance:: select(
@@ -430,8 +431,8 @@ class VehicleController extends Controller
         return ['request_details' => $requestDetails, 'po_details' =>  $poDetails, 'po_counts'=> count($poDetails) ];
     }
 
+    //ACKNOWLEDGE REQUEST MAINTENANCE
     public function acknowledge_request(Request $request){
-      info($request);
       try{
         DB::table('request_maintenances')
         ->where('id', $request->requestId)
@@ -458,6 +459,48 @@ class VehicleController extends Controller
           'message' => $error->getMessage(),
         ];
       } 
+    }
+
+    //UPDATE NEW REGISTRATION OF THE VEHICLE
+    public function vehicle_update_registration(Request $request){
+      try{
+        VehicleRegistration::create([
+          'vehicle_id' => $request->vehicleId,
+          'date_registration' => $request->date_vehicle_registration,
+          'date_expired' => $request->date_vehicle_xpiration,
+        ]);
+        return [
+          'status' => 'SUCCESS',
+          'id' => $request->vehicleId,
+          'message' => 'Updating Registration Successfully',
+      ];
+      }catch(\Throwable $err){
+        return [
+          'status' => 'ERROR',
+          'message' => $err->getMessage(),
+      ];
+      }
+      
+    }
+
+    public function vehicle_update_insurance(Request $request){
+      try{
+        Insurance::create([
+          'vehicle_id' => $request->vehicleId,
+          'date_insurance_applied' => $request->date_insurance_applied,
+          'date_insurance_expired' => $request->date_insurance_xpired,
+        ]);
+          return [
+            'status' => 'SUCCESS',
+            'id' => $request->vehicleId,
+            'message' => 'Updating Insurance Successfully',
+        ];
+      }catch(\Throwable $err){
+          return [
+            'status' => 'ERROR',
+            'message' => $err->getMessage(),
+        ];
+      }
     }
 }
 

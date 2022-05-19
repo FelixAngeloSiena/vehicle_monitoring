@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Driver;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Vehicle;
+use Illuminate\Support\Carbon;
 use Yajra\DataTables\Facades\DataTables;
 
 class AdminController extends Controller
@@ -15,10 +17,12 @@ class AdminController extends Controller
 
         $vehiclesCount = Vehicle::count();
         $reservationsCount = Reservation::where('reservation_date', now()->format('Y-m-d'))->count();
-        
-    
-    
-        return view('content.admin.admin_dashboard',compact( 'vehiclesCount', 'reservationsCount'));
+        $driverCounts = Driver::count();
+        $reservationApproverCounts = Reservation::whereNull('deleted_at')
+        ->whereRaw('STR_TO_DATE(reservation_date, "%Y-%m-%d") >= "'.Carbon::now()->format('Y-m-d').'"')
+        ->count();
+
+        return view('content.admin.admin_dashboard',compact( 'vehiclesCount', 'reservationsCount','driverCounts','reservationApproverCounts'));
     }
 
 

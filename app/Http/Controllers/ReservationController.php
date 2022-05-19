@@ -26,6 +26,9 @@ class ReservationController extends Controller
         return view('content.reservation.approve_reservation');
     }
 
+    public function vehicle_completed_reservation(){
+        return view('content.reservation.completed_reservation');
+    }
 
 
     public function get_all_reservation(){
@@ -167,6 +170,34 @@ class ReservationController extends Controller
                 return '<td>'.Carbon::parse($row->created_at)->format('M d, Y').'</td>';
             })
             
+            ->rawColumns(['_driver_name', '_status', '_created_at'])
+            ->make(true);
+        }catch(\Throwable $error){
+            return $error->getMessage();
+        }
+    }
+
+    public function get_completed_reservation(){
+        try{
+            $approve_reservation = Reservation::join('users', 'reservations.user_id', 'users.id')
+            ->join('vehicles', 'reservations.vehicle_id', 'vehicles.id')
+            ->join('drivers', 'drivers.id', 'vehicles.driver_id')
+            ->select(['users.*', 'vehicles.*', 'reservations.*', 'drivers.user_id as driverID'])
+            ->where('reservations.reservation_status', '=', 'approve')
+            ->whereRaw('STR_TO_DATE(reservations.reservation_date, "%Y-%m-%d") < "'.Carbon::now()->format('Y-m-d').'"');
+            return  DataTables::of($approve_reservation)
+            ->addIndexColumn()
+            ->addColumn('_driver_name',function($row){
+                $drivername = User::where('id', $row->driverID)->first();
+                return '<td>'.$drivername->name.'</td>';
+            })
+            ->addColumn('_status',function($row){
+                return '<td><span class="badge bg-success"> Completed </span></td>';
+            })
+            
+            ->addColumn('_created_at',function($row){
+                return '<td>'.Carbon::parse($row->created_at)->format('M d, Y').'</td>';
+            })
             ->rawColumns(['_driver_name', '_status', '_created_at'])
             ->make(true);
         }catch(\Throwable $error){

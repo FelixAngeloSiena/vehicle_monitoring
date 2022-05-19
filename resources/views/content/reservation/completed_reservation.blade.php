@@ -3,12 +3,12 @@
     <div class="container-fluid p-0">
         <div class="row">
             <div class="d-flex justify-content-between">
-                <h1 class="h3 mb-3"><strong>Approve</strong> Reservation</h1>
+                <h1 class="h3 mb-3"><strong>Cancel</strong> Reservation</h1>
             </div>
             <div class="card" style="border: 1px solid #251D3A">
                 <div class="card-body shadow-sm">
                     <div class="table-responsive">
-                        <table class="table table-striped" id="reservationApproveInitTable" width="100%">
+                        <table class="table table-striped" id="reservationCompletedInitTable" width="100%">
                             <thead style="width:100%">
                                         <tr>
                                             <th>Requestor Name</th>
@@ -37,28 +37,27 @@
 @section('script')
     <script>
 
-    $( document ).ready(function() {
-        initTable();
-    });
-
-
-    const initTable = () => {
-        $('#reservationApproveInitTable').DataTable({
-            destroy: true,
-            responsive: true,
-            serverSide:true,
-            processing:true,
-            ajax:'/fetch/approve',
-            columns:[
-                {'data':'name'},
-                {'data':'_driver_name' },
-                {'data':'vehicle_type' },
-                {'data':'plate_no'},
-                {'data':'reservation_date'},
-                {'data':'_created_at' },
-                {'data':'_status'},
-            ]
+        $( document ).ready(function() {
+            initTable();
         });
-    }
+        
+        const initTable = () => {
+            $('#reservationCompletedInitTable').DataTable({
+                destroy: true,
+                responsive: true,
+                serverSide:true,
+                processing:true,
+                ajax:'/fetch/approve/completed',
+                columns:[
+                    {'data':'name'},
+                    {'data':'_driver_name' },
+                    {'data':'vehicle_type' },
+                    {'data':'plate_no'},
+                    {'data':'reservation_date'},
+                    {'data':'_created_at' },
+                    {'data':'_status'},
+                ]
+            });
+        }
     </script>
 @endsection

@@ -6,11 +6,11 @@
 
                 <div class="d-flex justify-content-between">
                     <h1 class="h3 mb-3"><strong>Vehicle Drivers</strong> Records</h1>
-                    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal"
-                        style="color:#fff;font-size:17px;font-weight:bold" data-bs-target="#create_driver"> <img src="https://img.icons8.com/external-anggara-glyph-anggara-putra/25/ffffff/external-edit-basic-ui-anggara-glyph-anggara-putra.png"/>Add another driver</button>
+                    <button type="button" class="btn mb-3" data-bs-toggle="modal"
+                        style="color:#fff;font-size:17px;font-weight:bold;background-color:#251D3A" data-bs-target="#create_driver"> <img src="https://img.icons8.com/external-anggara-glyph-anggara-putra/25/ffffff/external-edit-basic-ui-anggara-glyph-anggara-putra.png"/>Add another driver</button>
                 </div>
 
-                <div class="card">
+                <div class="card" style="border:solid 1px #251D3A">
                     <div class="card-body shadow-sm">
                         <table id="driverInitTable" class="table-striped display" cellspacing="0" width="100%">
                             <thead>
@@ -57,7 +57,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content" style="background-color: #F4F3EF">
 
-                <div class="d-flex justify-content-between p-3" style="background-color: #3B7DDD;">
+                <div class="d-flex justify-content-between p-3" style="background-color: #251D3A;">
                     <h5 class="modal-title" id="modal-reservation-title"
                         style="color:#fff;font-size:20px;font-weight:bold">Create Driver</h5>
                     <i class="fas fa-times fa-2x" data-bs-dismiss="modal" style="cursor: pointer;color:#fff"></i>
@@ -72,7 +72,7 @@
                                     <div class="row">
                                  
                                             <div class="col-md-6">
-                                                <div class="card" style="border: 1px solid #f2f2f2">
+                                                <div class="card" style="border: 1px solid #251D3A">
                                                     <div class="card-body">
                                                         <p class="mb-0"
                                                             style="font-weight: bold;font-size:20px; ">Driver Details</p>
@@ -111,7 +111,7 @@
                                             </div>
 
                                             <div class="col-md-6">
-                                                <div class="card" style="border: 1px solid #f2f2f2">
+                                                <div class="card" style="border: 1px solid #251D3A">
                                                     <div class="card-body">
                                                         <p class="mb-0"
                                                             style="font-weight: bold;font-size:20px; ">Driver License Driver
@@ -172,7 +172,7 @@
                                     </div>
                                 </div>
                                 <div class="d-grid gap-2">
-                                    <button type="submit" id="submitDriverInfo" class="btn btn-primary mb-3"> Submit
+                                    <button type="submit" id="submitDriverInfo" class="btn mb-3" style="background-color: #251D3A;color:#fff;font-size:17px;"> Submit
                                     </button>
                                 </div>
            

@@ -5,7 +5,7 @@
             <div class="d-flex justify-content-between">
                 <h1 class="h3 mb-3"><strong>Cancel</strong> Reservation</h1>
             </div>
-            <div class="card">
+            <div class="card" style="border: 1px solid #251D3A">
                 <div class="card-body shadow-sm">
                     <div class="table-responsive">
                         <table class="table table-striped" id="reservationCancelInitTable" width="100%">

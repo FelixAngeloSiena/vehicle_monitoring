@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ApproverController;
 use App\Http\Controllers\AuditController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ReservationController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\DriverController;
 use App\Http\Controllers\PurchasingController;
 use App\Http\Controllers\VehicleController;  
 use App\Http\Controllers\RequestorController; 
+
 
 
 // ----------------------------------------------------------------------------
@@ -73,13 +75,37 @@ Route::middleware('auth')->group(function(){
         Route::get('/vehicles/reservation', 'vehicle_reservation')->name('vehicle.view.reservation');
         Route::get('/vehicle/cancel/reservation', 'vehicle_cancel_reservation')->name('view.cancel.reservation');
         Route::get('/vehicle/approve/reservation', 'vehicle_approve_reservation')->name('view.approve.reservation');
+        Route::get('/vehicle/completed/reservation', 'vehicle_completed_reservation')->name('view.completed.reservation');
 
-    
         Route::get('/fetch/reservation', 'get_all_reservation')->name('vehicle.fetch.reservation');
         Route::get('/fetch/cancel', 'get_cancel_reservation')->name('vehicle.fetch.cancel');
         Route::get('/fetch/approve', 'get_approve_reservation')->name('vehicle.fetch.approve');
+        Route::get('/fetch/approve/completed', 'get_completed_reservation')->name('vehicle.fetch.completed');
+
         Route::get('/cancel/reservation/{id}', 'cancel_reservation')->name('cancel.reservation');
         Route::get('/approve/reservation/{id}', 'approve_reservation')->name('approve.reservation');
+
+    });
+});
+
+
+// ----------------------------------------------------------------------------
+//   COMPANY RESERVATION APPROVER ROUTE GROUP
+// ---------------------------------------------------------------------------- 
+Route::middleware('auth')->group(function(){
+    Route::controller(ApproverController::class)->prefix('approver')->group(function () {
+        Route::get('/request/reservation', 'approver_reservation')->name('approver.dashboard');  
+        Route::get('/fetch/reservation', 'get_approver_request_reservation')->name('fetch.approver.reservation'); 
+
+        Route::get('/approve/reservation', 'approver_approve_reservation')->name('approver.approve');  
+        Route::get('/fetch/approve/reservation', 'get_approver_approve_reservation')->name('fetch.approver.approve.reservation'); 
+        
+        Route::get('/cancel/reservation', 'approver_cancel_reservation')->name('approver.cancel');  
+        Route::get('/fetch/cancel/reservation', 'get_approver_cancel_reservation')->name('fetch.approver.cancel.reservation'); 
+
+        Route::get('/cancel/reservation/{id}', 'cancel_reservation')->name('approver.cancel.reservation'); 
+        Route::get('/approve/reservation/{id}', 'approve_reservation')->name('approver.approve.reservation'); 
+
     });
 });
 
@@ -123,8 +149,12 @@ Route::middleware('auth')->group(function(){
 
     Route::post('/acknowledge/request', 'acknowledge_request')->name('vehicle.acknowledge.request');
 
+    //UPDATE REGISTRATION VEHICLE
+    Route::post('/vehicle/update/registration', 'vehicle_update_registration')->name('vehicle.update.registration'); 
 
-    
+    //UPDATE INSURANCE OF VEHICLE
+    Route::post('/vehicle/update/insurance', 'vehicle_update_insurance')->name('vehicle.update.insurance'); 
+       
     });
 });
 
